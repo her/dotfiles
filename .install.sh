@@ -30,7 +30,7 @@ echo "Changing to $dir"
 cd $dir
 echo "...done"
 
-#clean ~/ and create symlinks for dfiles
+#clean ~/ and create symlinks for files 
 
 for file in $files; do
   echo "Cleaning old symlinks mv to oldir"
@@ -39,7 +39,7 @@ for file in $files; do
   ln -s ~/etc/dotfiles/$file ~/$file
 done
 
-#clean ~/ and create symlinks for files
+#clean ~/ and create symlinks for hidden files
 
 for dfile in $dfiles; do
   echo "Cleaning old symlinks mv to oldir"
