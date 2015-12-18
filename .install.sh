@@ -15,6 +15,7 @@ files="
 
 dfiles=" 
 	 vimrc
+	 gitconfig
 "
 
 
