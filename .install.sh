@@ -16,6 +16,7 @@ files="
 dfiles=" 
 	 vimrc
 	 gitconfig
+	 tmux.conf
 "
 
 
