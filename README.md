@@ -1,10 +1,12 @@
 # dotfiles
 
-Personal dotfiles and other configuration files. Current files in this repo
+Hidden and other configuration files. Current files in this repo
 include:
 
 * **vimrc**
 * **tmux.conf**
+* **git-prompt.sh**
+* **git-completion.bash**
 
 This repository also includes a simple bash script to create symlinks between
 the dotfiles directory and home `.install.sh`
