@@ -58,6 +58,8 @@ let g:syntastic_filetype_map = {
 
 let g:syntastic_extra_filetypes = [ "markdown", "ghmarkdown" ]
 
+let g:syntastic_html_tidy_ignore_errors = [ '<input> proprietary attribute "role"' ]
+
 "---------------------------------------- 
 " lightline
 "---------------------------------------- 
