@@ -1,0 +1,9 @@
+[color]
+        ui = auto
+[core]
+        editor= vim
+[merge]
+        conflictstyle = diff3
+[user]
+        email = her@users.noreply.github.com 
+        name = melanie
