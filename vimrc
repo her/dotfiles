@@ -46,9 +46,15 @@ let g:syntastic_shell = "/bin/bash"
 let g:syntastic_loc_list_height=5
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_auto_loc_list = 0    " Don't auto-open linter
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode="passive"
+let g:syntastic_enable_signs=1
+let g:syntastic_warning_symbol="⚠️ "
+let g:syntastic_error_symbol="🚫 "
+nnoremap <F7> :SyntasticCheck<CR> :lopen<CR>    " Use F7 to show linter
+nnoremap <F8> :exit<CR>    " Use F8 to close linter
 
 let g:syntastic_markdown_checkers = ['mdl']
 
