@@ -22,8 +22,14 @@ call plug#end()
 "Forces vim to use POSIX shell if using fish
 set shell=bash             
 
+" text width 80
+set tw=80
+
 "Enables line numbers
 set nu
+
+" set paste mode
+set pastetoggle=<F3>
 
 "Highlights regex searches
 set hlsearch
