@@ -42,6 +42,12 @@ syntax on
 "Automatically wrap markdown text
 au BufRead, BufNewFile *.md *.markdown *.ghmarkdown setlocal textwidth=80
 
+" Configs tab key
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
 "---------------------------------------- 
 " syntastic
 "---------------------------------------- 
@@ -173,7 +179,6 @@ let g:instant_markdown_autostart = 0
 "---------------------------------------- 
 " browserlink 
 "---------------------------------------- 
-
 let g:bl_serverpath = "http://127.0.0.1:9001"
 let g:bl_pagefiletypes = ["html", "javascript", "css"]
 
