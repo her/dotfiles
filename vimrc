@@ -21,25 +21,25 @@ Plug 'junegunn/vim-emoji'
 
 call plug#end()          
 
-"Forces vim to use POSIX shell if using fish
+" Forces vim to use POSIX shell if using fish
 set shell=bash             
 
 " text width 80
 set tw=80
 
-"Enables line numbers
+" Enables line numbers
 set nu
 
 " set paste mode
 set pastetoggle=<F3>
 
-"Highlights regex searches
+" Highlights regex searches
 set hlsearch
 
-"Enables syntax highlighting
+" Enables syntax highlighting
 syntax on
 
-"Automatically wrap markdown text
+" Automatically wrap markdown text
 au BufRead, BufNewFile *.md *.markdown *.ghmarkdown setlocal textwidth=80
 
 " Configs tab key
