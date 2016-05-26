@@ -11,6 +11,7 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
 Plug 'suan/vim-instant-markdown'
+Plug 'jaxbot/browserlink.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
@@ -173,6 +174,13 @@ colorscheme solarized
 "---------------------------------------- 
 filetype plugin on
 let g:instant_markdown_autostart = 0
+
+"---------------------------------------- 
+" browserlink 
+"---------------------------------------- 
+
+let g:bl_serverpath = "http://127.0.0.1:9001"
+let g:bl_pagefiletypes = ["html", "javascript", "css"]
 
 "---------------------------------------- 
 " vim-markdown
