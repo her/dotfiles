@@ -48,6 +48,14 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" Hold ctrl + jk to move windows
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+
+" resize splits with -, +
+:map - <C-W>-
+:map + <C-W>+
+
 "---------------------------------------- 
 " syntastic
 "---------------------------------------- 
