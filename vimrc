@@ -12,6 +12,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
 Plug 'gorodinskiy/vim-coloresque'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'mxw/vim-jsx'
 Plug 'suan/vim-instant-markdown'
 Plug 'jaxbot/browserlink.vim'
 Plug 'tpope/vim-unimpaired'
@@ -22,28 +24,31 @@ Plug 'junegunn/vim-emoji'
 
 call plug#end()          
 
-" Forces vim to use POSIX shell if using fish
+" forces vim to use POSIX shell if using fish
 set shell=bash             
+
+" sets 256 term color
+set t_Co=256
 
 " text width 80
 set tw=80
 
-" Enables line numbers
+" enables line numbers
 set nu
 
 " set paste mode
 set pastetoggle=<F3>
 
-" Highlights regex searches
+" highlights regex searches
 set hlsearch
 
 " Enables syntax highlighting
 syntax on
 
-" Automatically wrap markdown text
+" automatically wrap markdown text
 au BufRead, BufNewFile *.md *.markdown *.ghmarkdown setlocal textwidth=80
 
-" Configs tab key
+" configs tab key
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
@@ -176,6 +181,18 @@ set background=dark
 colorscheme solarized
 
 "---------------------------------------- 
+" rainbow parentheses 
+"---------------------------------------- 
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+au VimEnter * RainbowParentheses 
+
+"---------------------------------------- 
+" vim-jsx 
+"---------------------------------------- 
+let g:jsx_ext_required = 0 "enables .jsx & .js
+ 
+"---------------------------------------- 
 " instant-markdown
 "---------------------------------------- 
 filetype plugin on
@@ -200,4 +217,3 @@ augroup END
 " vimemoji
 "---------------------------------------- 
 set completefunc=emoji#complete
-
