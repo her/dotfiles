@@ -13,6 +13,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'bigfish/vim-js-context-coloring'
+Plug 'helino/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'suan/vim-instant-markdown'
 Plug 'jaxbot/browserlink.vim'
@@ -188,10 +191,15 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 au VimEnter * RainbowParentheses 
 
 "---------------------------------------- 
+" vim-javascript 
+"---------------------------------------- 
+let g:javascript_enable_domhtmlcss = 1
+
+"---------------------------------------- 
 " vim-jsx 
 "---------------------------------------- 
-let g:jsx_ext_required = 0 "enables .jsx & .js
- 
+let g:jsx_ext_required = 1 
+
 "---------------------------------------- 
 " instant-markdown
 "---------------------------------------- 
