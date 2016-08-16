@@ -1,10 +1,10 @@
 #!/bin/bash
 ##################################
 # .install.sh
-# ln -s dotfiles to home directory
+# ln -s dotfiles
 ##################################
 
-##########Variables
+#Set Variables
 
 dir=/Users/mb/etc/dotfiles         #dotfiles directory  
 olddir=/Users/mb/etc/dotfiles_old  #dotfiles backup     
@@ -20,10 +20,10 @@ dfiles="
 "
 
 
-##########Process
+#Run Process
 
 #create dotfiles_old in 'olddir'
-echo "Creating dotfiles_old in /etc/dotfiles"
+echo "Creating dotfiles_old in ~/etc/dotfiles"
 mkdir -p $olddir
 echo "...done"
 
@@ -44,9 +44,14 @@ done
 #clean ~/ and create symlinks for hidden files
 
 for dfile in $dfiles; do
-  echo "Cleaning old symlinks mv to oldir"
+  echo "Cleaning old symlinks mv to olddir"
   mv ~/.$dfile ~/etc/dotfiles_old/
   echo "Creating symlinks from dir to home" 
   ln -s ~/etc/dotfiles/$dfile ~/.$dfile
 done
 
+#Delete 'olddir'
+echo "Removing 'olddir'"
+cd ~/etc
+rm -rf dotfiles_old/
+echo "done"
