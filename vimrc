@@ -14,6 +14,7 @@ Plug 'suan/vim-instant-markdown'
 call plug#end()          
 
 set nu
+set rnu
 set hlsearch
 set expandtab
 set tw=80
