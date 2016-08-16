@@ -5,6 +5,7 @@ Plug 'scrooloose/syntastic'
 Plug 'itchyny/lightline.vim'
 Plug 'mxw/vim-jsx'
 Plug 'jelera/vim-javascript-syntax'
+Plug 'Townk/vim-autoclose'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
@@ -19,7 +20,7 @@ set hlsearch
 set expandtab
 set tw=80
 set t_Co=256
-set tabstop=4
+set tabstop=2
 set shell=bash             
 set laststatus=2 
 set timeoutlen=50 
@@ -39,6 +40,8 @@ syntax on
 syntax enable
 filetype plugin on
 filetype plugin indent on
+hi LineNr ctermfg=grey
+hi CursorLineNr ctermfg=169 "#d75faf
 au FileType * set cole=0
 au VimEnter * RainbowParentheses 
 au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
@@ -51,17 +54,17 @@ let g:syntastic_error_symbol="❌ "
 let g:syntastic_shell = "/bin/bash"
 let g:syntastic_loc_list_height=5
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0    " Don't auto-open linter
+let g:syntastic_auto_loc_list = 0 
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode="passive"
 let g:syntastic_enable_signs=1
 let g:syntastic_markdown_checkers = ['mdl']
+let g:syntastic_extra_filetypes = [ "markdown", "ghmarkdown" ]
+let g:syntastic_html_tidy_ignore_errors = ['<html> proprietary attribute "class"', '<script> proprietary attribute "async"'] 
 let g:syntastic_filetype_map = { 
          \    'mkd': 'markdown', 
          \    'ghmarkdown': 'markdown' }
-let g:syntastic_extra_filetypes = [ "markdown", "ghmarkdown" ]
-let g:syntastic_html_tidy_ignore_errors = ['<html> proprietary attribute "class"', '<script> proprietary attribute "async"'] 
 
 "------------ 
 " lightline
@@ -132,3 +135,4 @@ let g:jsx_ext_required = 1
 " instant-markdown
 "------------------- 
 let g:instant_markdown_autostart = 0 
+
