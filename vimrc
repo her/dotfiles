@@ -36,7 +36,7 @@ nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
 nnoremap <F8> :exit<CR> 
 nnoremap <F7> :SyntasticCheck<CR> :lopen<CR> 
-nnoremap <CR> :noh<CR><CR>
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
 syntax on
 syntax enable
 filetype plugin on
