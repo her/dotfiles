@@ -8,15 +8,15 @@
 dir=/Users/mb/etc/dotfiles   
 trash=/Users/mb/etc/dotfiles_old     
 files="                    
-         git-prompt.sh
-	 git-completion.bash
+  git-prompt.sh
+  git-completion.bash
 "
 
 dotfiles=" 
-	 vimrc
-	 gitconfig
-	 tmux.conf
-   bash_profile
+  vimrc
+  gitconfig
+  tmux.conf
+  bash_profile
 "
 
 # Making a temporary directory to store trash.
