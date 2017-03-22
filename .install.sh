@@ -4,8 +4,7 @@
 # ln -s dotfiles
 ##################################
 
-#Set Variables
-
+# Variables.
 dir=/Users/mb/etc/dotfiles         #dotfiles directory  
 olddir=/Users/mb/etc/dotfiles_old  #dotfiles backup     
 files="                    
@@ -17,23 +16,20 @@ dfiles="
 	 vimrc
 	 gitconfig
 	 tmux.conf
+   bash_profile
 "
 
-
-#Run Process
-
-#create dotfiles_old in 'olddir'
+# Create dotfiles_old in olddir.
 echo "Creating dotfiles_old in ~/etc/dotfiles"
 mkdir -p $olddir
 echo "...done"
 
-#move to dotfiles dir
+# Move to dotfiles dir.
 echo "Changing to $dir"
 cd $dir
 echo "...done"
 
-#clean ~/ and create symlinks for files 
-
+# Clean ~/ and create symlinks for files. 
 for file in $files; do
   echo "Cleaning old symlinks mv to oldir"
   mv ~/$file ~/etc/dotfiles_old/
@@ -41,8 +37,7 @@ for file in $files; do
   ln -s ~/etc/dotfiles/$file ~/$file
 done
 
-#clean ~/ and create symlinks for hidden files
-
+# Clean ~/ and create symlinks for hidden files.
 for dfile in $dfiles; do
   echo "Cleaning old symlinks mv to olddir"
   mv ~/.$dfile ~/etc/dotfiles_old/
@@ -50,7 +45,7 @@ for dfile in $dfiles; do
   ln -s ~/etc/dotfiles/$dfile ~/.$dfile
 done
 
-#Delete 'olddir'
+# Delete 'olddir'.
 echo "Removing 'olddir'"
 cd ~/etc
 rm -rf dotfiles_old/
