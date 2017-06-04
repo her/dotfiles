@@ -5,12 +5,12 @@ Plug 'scrooloose/syntastic'
 Plug 'itchyny/lightline.vim'
 Plug 'mxw/vim-jsx'
 Plug 'jelera/vim-javascript-syntax'
-Plug 'Townk/vim-autoclose'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'suan/vim-instant-markdown'
+Plug 'Raimondi/delimitMate'
 
 call plug#end()
 
@@ -29,9 +29,9 @@ set encoding=utf8
 set updatetime=100
 set background=dark
 set pastetoggle=<F3>
+set backspace=indent,eol,start
 set statusline+=%*
 set statusline+=%#warningmsg#
-set backspace=indent,eol,start
 set statusline+=%{SyntasticStatuslineFlag()}
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
