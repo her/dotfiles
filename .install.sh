@@ -16,7 +16,6 @@ dotfiles="
   vimrc
   gitconfig
   tmux.conf
-  bash_profile
 "
 
 # Making a temporary directory to store trash.
