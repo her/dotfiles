@@ -1,16 +1,17 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'Valloric/YouCompleteMe'
+Plug 'ajh17/VimCompletesMe'
 Plug 'scrooloose/syntastic'
 Plug 'itchyny/lightline.vim'
 Plug 'mxw/vim-jsx'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
+Plug 'unblevable/quick-scope'
 Plug 'airblade/vim-gitgutter'
 Plug 'suan/vim-instant-markdown'
-Plug 'Raimondi/delimitMate'
 
 call plug#end()
 
@@ -132,6 +133,11 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 " vim-jsx
 "
 let g:jsx_ext_required = 1
+
+"
+" quick-scope
+"
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 "
 " instant-markdown
