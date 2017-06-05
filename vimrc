@@ -1,8 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'itchyny/lightline.vim'
 Plug 'ajh17/VimCompletesMe'
 Plug 'w0rp/ale'
-Plug 'itchyny/lightline.vim'
 Plug 'mxw/vim-jsx'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'gorodinskiy/vim-coloresque'
@@ -49,18 +49,7 @@ au FileType * set cole=0
 au VimEnter * RainbowParentheses 
 au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
 
-"
-" ale
-"
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = "⛔️"
-let g:ale_sign_warning = "⚠️ "
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-
-"
 " lightline
-"
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -106,29 +95,26 @@ function! LightLineFugitive()
   return ''
 endfunction
 
-"
+" ale
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = "⛔️"
+let g:ale_sign_warning = "⚠️ "
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+
 " indentline
-"
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 239
 
-"
 " rainbow parentheses
-"
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
-"
 " vim-jsx
-"
 let g:jsx_ext_required = 1
 
-"
 " quick-scope
-"
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-"
 " instant-markdown
-"
 let g:instant_markdown_autostart = 0
