@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'ajh17/VimCompletesMe'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'itchyny/lightline.vim'
 Plug 'mxw/vim-jsx'
 Plug 'jelera/vim-javascript-syntax'
@@ -50,24 +50,13 @@ au VimEnter * RainbowParentheses
 au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
 
 "
-" syntastic
+" ale
 "
-let g:syntastic_warning_symbol="⚠️ "
-let g:syntastic_error_symbol="❌ "
-let g:syntastic_shell = "/bin/bash"
-let g:syntastic_loc_list_height=5
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode="passive"
-let g:syntastic_enable_signs=1
-let g:syntastic_markdown_checkers = ['mdl']
-let g:syntastic_extra_filetypes = [ "markdown", "ghmarkdown" ]
-let g:syntastic_html_tidy_ignore_errors = ['<html> proprietary attribute "class"', '<script> proprietary attribute "async"'] 
-let g:syntastic_filetype_map = { 
-         \    'mkd': 'markdown', 
-         \    'ghmarkdown': 'markdown' }
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = "⛔️"
+let g:ale_sign_warning = "⚠️ "
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
 
 "
 " lightline
