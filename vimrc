@@ -18,8 +18,8 @@ call plug#end()
 set nu
 set rnu
 set hlsearch
-set expandtab
 set tw=80
+set mouse=a
 set t_Co=256
 set expandtab
 set tabstop=4
@@ -28,7 +28,6 @@ set softtabstop=4
 set shell=bash
 set laststatus=2
 set timeoutlen=50
-set shiftwidth=4
 set encoding=utf8
 set updatetime=100
 set background=dark
