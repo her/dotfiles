@@ -21,7 +21,10 @@ set hlsearch
 set expandtab
 set tw=80
 set t_Co=256
-set tabstop=2
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set shell=bash
 set laststatus=2
 set timeoutlen=50
