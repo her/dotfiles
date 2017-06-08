@@ -34,9 +34,6 @@ set updatetime=100
 set background=dark
 set pastetoggle=<F3>
 set backspace=indent,eol,start
-set statusline+=%*
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
