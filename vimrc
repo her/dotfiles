@@ -21,7 +21,6 @@ set tw=80
 set mouse=a
 set t_Co=256
 set expandtab
-set cursorline
 set smartindent
 set incsearch
 set smartcase
@@ -46,7 +45,6 @@ filetype plugin on
 filetype plugin indent on
 hi LineNr ctermfg=244
 hi CursorLineNr ctermbg=234 ctermfg=169
-hi CursorLine cterm=none ctermbg=234 
 au FileType * set cole=0
 au VimEnter * RainbowParentheses 
 au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
