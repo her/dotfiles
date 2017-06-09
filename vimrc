@@ -25,6 +25,7 @@ set cursorline
 set smartindent
 set incsearch
 set smartcase
+set ignorecase
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
