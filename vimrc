@@ -21,7 +21,10 @@ set tw=80
 set mouse=a
 set t_Co=256
 set expandtab
+set cursorline
 set smartindent
+set incsearch
+set smartcase
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
