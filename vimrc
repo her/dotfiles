@@ -44,7 +44,7 @@ syntax on
 syntax enable
 filetype plugin on
 filetype plugin indent on
-hi LineNr ctermfg=grey
+hi LineNr ctermfg=244
 hi CursorLineNr ctermbg=234 ctermfg=169
 hi CursorLine cterm=none ctermbg=234 
 au FileType * set cole=0
