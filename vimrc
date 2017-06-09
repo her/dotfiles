@@ -11,7 +11,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'unblevable/quick-scope'
 Plug 'airblade/vim-gitgutter'
-Plug 'suan/vim-instant-markdown'
 
 call plug#end()
 
@@ -22,6 +21,7 @@ set tw=80
 set mouse=a
 set t_Co=256
 set expandtab
+set smartindent
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -41,7 +41,8 @@ syntax enable
 filetype plugin on
 filetype plugin indent on
 hi LineNr ctermfg=grey
-hi CursorLineNr ctermfg=169 "#d75faf
+hi CursorLineNr ctermbg=234 ctermfg=169
+hi CursorLine cterm=none ctermbg=234 
 au FileType * set cole=0
 au VimEnter * RainbowParentheses 
 au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
@@ -102,6 +103,10 @@ highlight clear ALEWarningSign
 " indentline
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 239
+let g:indentLine_char = '|'
+
+" quick-scope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " rainbow parentheses
 let g:rainbow#max_level = 16
@@ -109,9 +114,3 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 " vim-jsx
 let g:jsx_ext_required = 1
-
-" quick-scope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" instant-markdown
-let g:instant_markdown_autostart = 0
