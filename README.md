@@ -13,6 +13,9 @@ If you've cloned this repo to a new host be sure to grab vim.plug and drop it in
 wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
+### Civic.terminal
+Terminal.app theme. Launch with Terminal and it will auto import.
+
 ### tmux
 
 * **MacOS Pastboard** - Access MacOS pasteboard in tmux sessions. Install with `brew install reattach-to-user-namesapce` [more info](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard)

@@ -118,3 +118,6 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 " vim-jsx
 let g:jsx_ext_required = 1
+
+" Ruby stuff 
+abbr pry require 'pry'; binding.pry
