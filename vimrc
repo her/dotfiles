@@ -20,6 +20,8 @@ set hlsearch
 set tw=80
 set mouse=a
 set t_Co=256
+set path+=**
+set wildmenu
 set expandtab
 set smartindent
 set incsearch
@@ -96,7 +98,7 @@ function! LightLineFugitive()
 endfunction
 
 " ale
-let g:ale_sign_column_always = 1
+let g:ale_sign_column_always = 0
 let g:ale_sign_error = "🔸"
 let g:ale_sign_warning = "🔹"
 highlight clear ALEErrorSign
