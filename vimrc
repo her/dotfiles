@@ -98,8 +98,9 @@ function! LightLineFugitive()
 endfunction
 
 " VimCompletesMe
-autocmd FileType text,markdown let b:vcm_tab_complete = "dict"
+autocmd FileType markdown,txt setlocal complete+=k/usr/share/dict/words
 autocmd FileType ruby let b:vcm_tab_complete = "omni"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " ale
 let g:ale_sign_column_always = 0
