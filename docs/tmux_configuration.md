@@ -18,4 +18,30 @@ Three packages are required to fix pbcopy when using tmux and terminal.app:
 * [tmux-yank](https://github.com/tmux-plugins/tmux-yank)
 * [tmux-MacOSX-pasteboard](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard)
 
+### Tmux Plugin Manager
+Create two new directories for TPM (Tmux Plugin Manager)
+`~/.tmux/plugins/`
+Then clone TPM
+`$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 
+Configure boilerplate for TPM in `.tmux.conf`
+```shell
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+```
+
+Now you can begin adding plugins to `.tmux.conf`, starting with TPM itself.
+```shell
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+```
+Installing, Uninstalling, and Updating plugins is done within tmux using the following commands:
+
+Install:
+`prefix` + <kbd>I</kbd> 
+
+Update:
+`prefix` + <kbd>U</kbd>
+
+Uninstall:
+`prefix` + <kbd>u</kbd>
