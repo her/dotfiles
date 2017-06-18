@@ -36,21 +36,17 @@ Now you can begin adding plugins to `~/.tmux.conf`, starting with TPM itself.
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 ```
-**Installing**, **Uninstalling**, and **Updating** plugins is done within tmux using the following commands:
 
-Install:
+Install TPM from within tmux:
+
 `prefix` + <kbd>I</kbd> 
-
-Update:
-`prefix` + <kbd>U</kbd>
-
-Uninstall:
-`prefix` + <kbd>u</kbd>
 
 ### tmux-yank
 Add the plugin to `~/.tmux.conf`
 
-`set -g @plugin 'tmux-plugins/tmux-yank'`
+```shell
+set -g @plugin 'tmux-plugins/tmux-yank'
+```
 
 Then install from within tmux using TPM's install hotkey
 
@@ -73,6 +69,17 @@ Copy the current working directory:
 
 Copying text within Vim is the same process as normal. Once text selection is
 highlighted in visual mode `"*y` will add it to the clipboard
+
+**Installing**, **Uninstalling**, and **Updating** plugins is done within tmux using the following TPM commands:
+
+Install:
+`prefix` + <kbd>I</kbd> 
+
+Update:
+`prefix` + <kbd>U</kbd>
+
+Uninstall:
+`prefix` + <kbd>u</kbd>
 
 **That's it! Congratulations on your overly configured .tmux.conf** 😅
 
