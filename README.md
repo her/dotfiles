@@ -10,7 +10,8 @@ If you've cloned this repo to a new host be sure to grab vim.plug and drop it in
 ~/.vim/autoload 
 
 ```shell
-wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
 ### Civic.terminal
