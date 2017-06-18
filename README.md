@@ -6,7 +6,7 @@ Contains various dotfiles and configuration files for MacOS
 
 ### vim-plug
 
-Run this command on a new host for easy vimrc bootstrappyness :black_heart:
+Install vim-plug :black_heart:
 
 ```shell
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
