@@ -22,4 +22,4 @@ Terminal.app theme. Launch with Terminal and it will auto import.
 
 ### .link.sh
 
-* `.link.sh` A simple bash script that symlinks dotfiles to `~/` and moves replaced dotfiles to dotfiles-old for easy deletion
+* `.link.sh` symlink dotfiles to `~/`. Delete old symlinks. 
