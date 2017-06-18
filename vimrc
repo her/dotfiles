@@ -97,6 +97,10 @@ function! LightLineFugitive()
   return ''
 endfunction
 
+" VimCompletesMe
+autocmd FileType text,markdown let b:vcm_tab_complete = "dict"
+autocmd FileType ruby let b:vcm_tab_complete = "omni"
+
 " ale
 let g:ale_sign_column_always = 0
 let g:ale_sign_error = "🔸"
