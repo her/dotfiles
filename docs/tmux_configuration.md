@@ -49,24 +49,40 @@ Uninstall:
 
 ### tmux-yank
 Add the plugin to `~/.tmux.conf`
+
 `set -g @plugin 'tmux-plugins/tmux-yank'`
 
 Then install from within tmux using TPM's install hotkey
+
 `prefix` + <kbd>I</kbd>
 
 ### tmux-MacOSX-pasteboard 
 `brew install reattach-to-user-namespace`
 
 Then add the following to your `~/.tmux.conf`
+
 `set-option -g default-command "reattach-to-user-namespace -l $SHELL"`
 
-### Finally! How to use this new functionality
+### Finally! How do we use this new functionality?
 
-To copy command line text to the clipboard use
+Copy command line text to the clipboard: 
 `prefix` + <kbd>y</kbd>
 
-To copy the current working directory use
+Copy the current working directory: 
 `prefix` + <kbd>Y</kbd>
 
 Copying text within Vim is the same process as normal. Once text selection is
 highlighted in visual mode `"*y` will add it to the clipboard
+
+**That's it! Congratulations on your overly configured .tmux.conf** 😅
+
+### Notes
+
+This works with tmux 2.5 Be sure to check future change logs before updating
+tmux... Lest you find yourself scouring the net again trying to fix your copy
+paste.
+
+An easier solution if this sounds like too much work (and it is, let's be
+honest) is to use iTerm2. Details on that are in the actual tmux-yank readme. 
+
+Cheers 🍻 
