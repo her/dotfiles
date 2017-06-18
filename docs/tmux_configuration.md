@@ -2,7 +2,7 @@
 
 ## Why Pasteboard Breaks
 
-Quoted from ChrisJohnsen's tmux-MacOSX-pasteboard readme: 
+Quoted from [ChrisJohnsen's tmux-MacOSX-pasteboard](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard) readme: 
 
 >**Access to the Mac OS X Pasteboard Service**
 >
@@ -46,3 +46,27 @@ Update:
 
 Uninstall:
 `prefix` + <kbd>u</kbd>
+
+### tmux-yank
+Add the plugin to `~/.tmux.conf`
+`set -g @plugin 'tmux-plugins/tmux-yank'`
+
+Then install from within tmux using TPM's install hotkey
+`prefix` + <kbd>I</kbd>
+
+### tmux-MacOSX-pasteboard 
+`brew install reattach-to-user-namespace`
+
+Then add the following to your `~/.tmux.conf`
+`set-option -g default-command "reattach-to-user-namespace -l $SHELL"`
+
+### Finally! How to use this new functionality
+
+To copy command line text to the clipboard use
+`prefix` + <kbd>y</kbd>
+
+To copy the current working directory use
+`prefix` + <kbd>Y</kbd>
+
+Copying text within Vim is the same process as normal. Once text selection is
+highlighted in visual mode `"*y` will add it to the clipboard
