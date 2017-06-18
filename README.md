@@ -6,8 +6,7 @@ Contains various dotfiles and configuration files for MacOS
 
 ### vim-plug
 
-If you've cloned this repo to a new host be sure to grab vim.plug and drop it in
-~/.vim/autoload 
+Run this command on a new host for easy vimrc bootstrappyness :black_heart:
 
 ```shell
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
