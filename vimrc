@@ -11,6 +11,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'unblevable/quick-scope'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -32,7 +33,8 @@ set shiftwidth=4
 set softtabstop=4
 set shell=bash
 set laststatus=2
-set timeoutlen=50
+set timeoutlen=1000
+set ttimeoutlen=0
 set encoding=utf8
 set updatetime=100
 set background=dark
