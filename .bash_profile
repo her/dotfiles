@@ -1,13 +1,10 @@
-alias ls='ls -G'
 PS1="\w "
 
-# Python3 (homebrew)
-export PATH=/usr/local/bin:$PATH
+# History wont record command preceded by a space
+HISTCONTROL="ignorespace"
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+# Colorized output
+alias ls="ls -G"
 
 # Color man pages
 man() {
@@ -21,3 +18,11 @@ man() {
 		LESS_TERMCAP_us=$(printf "\e[1;32m") \
 			man "$@"
 }
+
+# Python3 (homebrew)
+export PATH=/usr/local/bin:$PATH
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
