@@ -27,6 +27,7 @@ set expandtab
 set smartindent
 set incsearch
 set smartcase
+set lazyredraw
 set ignorecase
 set tabstop=2
 set shiftwidth=2
