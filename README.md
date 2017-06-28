@@ -13,6 +13,16 @@ Symlink dotfiles to `~/`. Delete old symlinks.
 ### Civic.terminal 👩‍🎨
 Terminal.app theme. Launch with Terminal and it will auto import.
 
+### Git Completion
+Run this:
+`curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash`
+Then add this to your `.bash_profile`
+```sh
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+```
+
 ### tmux 2.5 🏥
 Copying to the clipboard requires the following packages:
 * [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
