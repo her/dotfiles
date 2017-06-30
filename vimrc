@@ -27,6 +27,9 @@ set expandtab
 set smartindent
 set incsearch
 set smartcase
+set re=1
+set ttyfast
+set lazyredraw
 set ignorecase
 set tabstop=2
 set shiftwidth=2
