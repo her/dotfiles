@@ -42,6 +42,9 @@ set encoding=utf8
 set updatetime=100
 set background=dark
 set pastetoggle=<F3>
+set undodir=~/.vim/undo//
+set directory=~/.vim/swap//
+set backupdir=~/.vim/backup//
 set backspace=indent,eol,start
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
