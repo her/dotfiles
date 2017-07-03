@@ -12,6 +12,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'unblevable/quick-scope'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
+Plug 'her/central.vim'
 
 call plug#end()
 
@@ -143,14 +144,3 @@ let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
 
 " Ruby stuff
 abbr pry require 'pry'; binding.pry
-
-" Will make this a plugin. See docs for details.
-if !isdirectory($HOME . "/.vim/backup")
-    call mkdir($HOME . "/.vim/backup", "p")
-endif
-if !isdirectory($HOME . "/.vim/swap")
-    call mkdir($HOME . "/.vim/swap", "p")
-endif
-if !isdirectory($HOME . "/.vim/undo")
-    call mkdir($HOME . "/.vim/undo", "p")
-endif
