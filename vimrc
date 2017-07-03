@@ -104,7 +104,7 @@ endfunction
 
 " VimCompletesMe
 setlocal complete+=k/usr/share/dict/words
-autocmd FileType text,markdown let b:vcm_tab_complete = 'dict' 
+autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
 autocmd FileType ruby let b:vcm_tab_complete = "omni"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -138,5 +138,16 @@ let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
 
-" Ruby stuff 
+" Ruby stuff
 abbr pry require 'pry'; binding.pry
+
+" Will make this a plugin. See docs for details.
+if !isdirectory($HOME . "/.vim/backup")
+    call mkdir($HOME . "/.vim/backup", "p")
+endif
+if !isdirectory($HOME . "/.vim/swap")
+    call mkdir($HOME . "/.vim/swap", "p")
+endif
+if !isdirectory($HOME . "/.vim/undo")
+    call mkdir($HOME . "/.vim/undo", "p")
+endif
