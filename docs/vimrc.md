@@ -6,7 +6,7 @@ Documents the various configurations in my .vimrc for reference.
 
 Save all swap, backup, and undo to these locations. 
 
-```sh
+```vim
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
