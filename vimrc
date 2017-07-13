@@ -20,7 +20,6 @@ set rnu
 set hlsearch
 set tw=80
 set mouse=a
-set t_Co=256
 set path+=**
 set wildmenu
 set expandtab
