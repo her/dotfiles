@@ -40,7 +40,7 @@ set timeoutlen=1000
 set ttimeoutlen=0
 set encoding=utf8
 set updatetime=100
-set background=dark
+set background=light
 set pastetoggle=<F3>
 set undodir=~/.vim/undo//
 set directory=~/.vim/swap//
@@ -54,7 +54,7 @@ syntax enable
 filetype plugin on
 filetype plugin indent on
 hi LineNr ctermfg=244
-hi CursorLineNr ctermbg=234 ctermfg=169
+hi CursorLineNr ctermfg=169
 au FileType * set cole=0
 au VimEnter * RainbowParentheses 
 au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
