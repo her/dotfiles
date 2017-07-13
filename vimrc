@@ -12,6 +12,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'unblevable/quick-scope'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
+Plug 'her/central.vim'
 
 call plug#end()
 
@@ -41,6 +42,9 @@ set encoding=utf8
 set updatetime=100
 set background=dark
 set pastetoggle=<F3>
+set undodir=~/.vim/undo//
+set directory=~/.vim/swap//
+set backupdir=~/.vim/backup//
 set backspace=indent,eol,start
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
@@ -103,7 +107,7 @@ endfunction
 
 " VimCompletesMe
 setlocal complete+=k/usr/share/dict/words
-autocmd FileType text,markdown let b:vcm_tab_complete = 'dict' 
+autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
 autocmd FileType ruby let b:vcm_tab_complete = "omni"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -137,5 +141,5 @@ let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
 
-" Ruby stuff 
+" Ruby stuff
 abbr pry require 'pry'; binding.pry
