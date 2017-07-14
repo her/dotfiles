@@ -5,14 +5,14 @@
 #
 
 # Initializing variables.
-dir=/Users/mb/etc/dotfiles   
-trash=/Users/mb/etc/dotfiles_old     
-files="                    
+dir=/Users/melanie/etc/dotfiles
+trash=/Users/melanie/etc/dotfiles_old
+files="
   git-prompt.sh
   git-completion.bash
 "
 
-dotfiles=" 
+dotfiles="
   vimrc
   gitconfig
   tmux.conf
@@ -27,7 +27,7 @@ echo "Changing to $dir"
 cd $dir
 
 # Removing and replacing old files. Creating symbolic links for new files.
-echo "Removing and replacing old files. Creating symbolic links for new files." 
+echo "Removing and replacing old files. Creating symbolic links for new files."
 for file in $files; do
   mv ~/$file ~/etc/dotfiles_old/
   ln -s ~/etc/dotfiles/$file ~/$file
