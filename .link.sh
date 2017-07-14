@@ -2,7 +2,7 @@
 
 #
 # Creates symbolic links for miscellaneous configuration files.
-#
+# TODO make directory locations relative for portability
 
 # Initializing variables.
 dir=/Users/melanie/etc/dotfiles
