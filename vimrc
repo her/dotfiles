@@ -62,6 +62,7 @@ au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
 
 " lightline
 let g:lightline = {
+      \ 'colorscheme': 'PaperColor_light',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'filename' ] ]
