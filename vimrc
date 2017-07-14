@@ -13,6 +13,7 @@ Plug 'unblevable/quick-scope'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'her/central.vim'
+Plug 'gerw/vim-HiLinkTrace'
 
 call plug#end()
 
