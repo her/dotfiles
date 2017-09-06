@@ -14,6 +14,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'her/central.vim'
 Plug 'gerw/vim-HiLinkTrace'
+Plug 'tpope/vim-fugitive'
+Plug 'suan/vim-instant-markdown'
 
 call plug#end()
 
@@ -65,7 +67,7 @@ let g:lightline = {
       \ 'colorscheme': 'PaperColor_light',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename' ] ]
+      \             [ 'fugitive', 'filename', 'relativepath' ] ]
       \ },
       \ 'component_function': {
       \   'fugitive': 'LightLineFugitive',
@@ -87,7 +89,7 @@ function! LightLineModified()
 endfunction
 function! LightLineFilename()
   return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != expand('%:p:h') ? expand('%:p:h') : '[No Name]') .
        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 function! LightLineReadonly()
@@ -102,7 +104,7 @@ endfunction
 function! LightLineFugitive()
   if exists("*fugitive#head")
     let _ = fugitive#head()
-    return strlen(_) ? "\ue0a0 "._ : ''
+    return strlen(_) ? " "._ : ''
   endif
   return ''
 endfunction
@@ -119,6 +121,9 @@ let g:ale_sign_error = "🔸"
 let g:ale_sign_warning = "🔹"
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_javascript_eslint_executable = '.eslintrc.js'
 
 " indentline
 let g:indentLine_enabled = 1
@@ -131,6 +136,7 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " rainbow parentheses
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#blacklist = range(16, 255)
 
 " vim-jsx
 let g:jsx_ext_required = 1
@@ -142,6 +148,8 @@ let g:netrw_altv=1
 let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
 
 " Ruby stuff
 abbr pry require 'pry'; binding.pry
