@@ -16,6 +16,7 @@ Plug 'her/central.vim'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'tpope/vim-fugitive'
 Plug 'suan/vim-instant-markdown'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -67,7 +68,7 @@ let g:lightline = {
       \ 'colorscheme': 'PaperColor_light',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename', 'relativepath' ] ]
+      \             [ 'fugitive', 'filename' ] ]
       \ },
       \ 'component_function': {
       \   'fugitive': 'LightLineFugitive',
@@ -89,7 +90,7 @@ function! LightLineModified()
 endfunction
 function! LightLineFilename()
   return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-       \ ('' != expand('%:p:h') ? expand('%:p:h') : '[No Name]') .
+       \ ('' != expand('%:p') ? expand('%:p') : '[No Name]') .
        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 function! LightLineReadonly()
