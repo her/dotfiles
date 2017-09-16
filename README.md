@@ -10,8 +10,13 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 ### .link.sh 🔗
 Symlink dotfiles to `~/`. Delete old symlinks. 
 
-### Civic.terminal 👩‍🎨
-Terminal.app theme. Launch with Terminal and it will auto import.
+### Enlighten 👩‍🎨
+enlighten.terminal theme found [here](https://github.com/her/enlighten). This is
+a light theme that I made and enjoy. After downloading just open it with Terminal.app and it will auto import.
+
+```shell
+curl -fLo ~/Downloads/enlighten.terminal https://raw.githubusercontent.com/her/enlighten/master/enlighten.terminal
+```
 
 ### Git Completion
 Run this:
