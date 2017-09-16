@@ -65,18 +65,16 @@ au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
 
 " lightline
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor_light',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightLineFugitive',
-      \   'readonly': 'LightLineReadonly',
-      \   'modified': 'LightLineModified',
-      \   'filename': 'LightLineFilename'
-      \ }
-      \ }
+  \ 'colorscheme': 'PaperColor_light',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+  \   'right': [ [ 'cwd' ], [ 'lineinfo' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \ },
+  \ 'component_function': { 
+  \   'fugitive': 'LightLineFugitive', 'readonly': 'LightLineReadonly', 
+  \   'modified': 'LightLineModified', 'filename': 'LightLineFilename', 'cwd': 'getcwd' 
+  \   }
+  \ }
 function! LightLineModified()
   if &filetype == "help"
     return ""
