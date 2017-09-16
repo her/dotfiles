@@ -4,7 +4,7 @@
 Install vim-plug
 ```shell
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
 ### .link.sh 🔗
@@ -15,14 +15,19 @@ enlighten.terminal theme found [here](https://github.com/her/enlighten). This is
 a light theme that I made and enjoy. After downloading just open it with Terminal.app and it will auto import.
 
 ```shell
-curl -fLo ~/Downloads/enlighten.terminal https://raw.githubusercontent.com/her/enlighten/master/enlighten.terminal
+curl -fLo ~/Downloads/enlighten.terminal \
+  https://raw.githubusercontent.com/her/enlighten/master/enlighten.terminal
 ```
 
-### Git Completion
-Run this:
-`curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash`
+### Git Completion ✨
+Enables tab completion for git commands. Grab it with this:
+
+```shell
+curl -fLo ~/.git-completion.bash \
+  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+```
 Then add this to your `.bash_profile`
-```sh
+```shell
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
