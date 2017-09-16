@@ -5,17 +5,14 @@
 # TODO make directory locations relative for portability
 
 # Initializing variables.
-dir=/Users/melanie/etc/dotfiles
-trash=/Users/melanie/etc/dotfiles_old
+dir=~/etc/dotfiles
+trash=~/etc/dotfiles_old
 files="
-  git-prompt.sh
-  git-completion.bash
 "
 
 dotfiles="
   vimrc
   gitconfig
-  tmux.conf
 "
 
 # Making a temporary directory to store trash.
