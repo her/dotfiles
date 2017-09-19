@@ -1,3 +1,8 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
@@ -121,11 +126,6 @@ highlight clear ALEWarningSign
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint']
 let g:ale_javascript_eslint_executable = '.eslintrc.js'
-
-" indentline
-let g:indentLine_enabled = 1
-let g:indentLine_color_term = 239
-let g:indentLine_char = '▏'
 
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
