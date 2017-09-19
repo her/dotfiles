@@ -23,29 +23,30 @@ call plug#end()
 set nu
 set rnu
 set hlsearch
-set tw=80
-set mouse=a
-set path+=**
 set wildmenu
 set expandtab
 set smartindent
 set incsearch
 set smartcase
-set re=1
 set ttyfast
 set lazyredraw
 set ignorecase
+set re=1
+set tw=80
+set mouse=a
+set path+=**
 set tabstop=2
-set shiftwidth=2
-set softtabstop=2
 set shell=bash
 set laststatus=2
-set timeoutlen=1000
+set shiftwidth=2
+set softtabstop=2
 set ttimeoutlen=0
 set encoding=utf8
 set updatetime=100
+set timeoutlen=1000
 set background=light
 set pastetoggle=<F3>
+set tags=./tags,tags;
 set backspace=indent,eol,start
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
@@ -124,7 +125,7 @@ let g:ale_javascript_eslint_executable = '.eslintrc.js'
 " indentline
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 239
-let g:indentLine_char = '|'
+let g:indentLine_char = '▏'
 
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -132,7 +133,7 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " rainbow parentheses
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#blacklist = range(16, 255)
+let g:rainbow#blacklist = range(17, 255)
 
 " vim-jsx
 let g:jsx_ext_required = 1
