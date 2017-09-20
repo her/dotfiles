@@ -65,6 +65,8 @@ hi CursorLineNr ctermfg=169
 au FileType * set cole=0
 au VimEnter * RainbowParentheses 
 au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 
 " lightline
 let g:lightline = {
