@@ -56,13 +56,11 @@ set backspace=indent,eol,start
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
-syntax on
 syntax enable
 filetype plugin on
 filetype plugin indent on
 hi LineNr ctermfg=244
 hi CursorLineNr ctermfg=169
-au FileType * set cole=0
 au VimEnter * RainbowParentheses 
 au BufRead, BufNewFile *.md *.ghmarkdown setlocal textwidth=80
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
