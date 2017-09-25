@@ -4,7 +4,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-
 Plug 'itchyny/lightline.vim'
 Plug 'ajh17/VimCompletesMe'
 Plug 'w0rp/ale'
@@ -22,7 +21,6 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'tpope/vim-fugitive'
 Plug 'suan/vim-instant-markdown'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-
 call plug#end()
 
 set number
@@ -83,36 +81,36 @@ endfunction
 " VimCompletesMe
 setlocal complete+=k/usr/share/dict/words
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+autocmd FileType ruby,python let b:vcm_tab_complete = "omni"
 autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
-autocmd FileType ruby let b:vcm_tab_complete = "omni"
 
 " ale
-let g:ale_sign_column_always = 0
+let g:ale_fixers = {}
 let g:ale_sign_error = "🔸"
 let g:ale_sign_warning = "🔹"
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-let g:ale_fixers = {}
+let g:ale_sign_column_always = 0
 let g:ale_fixers.javascript = ['eslint']
 let g:ale_javascript_eslint_executable = '.eslintrc.js'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
 
 " vim-jsx
 let g:jsx_ext_required = 1
 
 " rainbow parentheses
-let g:rainbow#max_level = 16
+let g:rainbow#max_level = 15
+let g:rainbow#blacklist = range(15, 255)
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#blacklist = range(17, 255)
 autocmd VimEnter * RainbowParentheses 
 
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " netrw
-let g:netrw_banner=0
-let g:netrw_browse_split=4
 let g:netrw_altv=1
+let g:netrw_banner=0
 let g:netrw_liststyle=3
+let g:netrw_browse_split=4
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
 
