@@ -58,8 +58,8 @@ set timeoutlen=1000
 set pastetoggle=<F3>
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
-nnoremap <C-Right> :tabnext<CR>
-nnoremap <C-Left> :tabprevious<CR>
+nnoremap <S-Right> :tabnext<CR>
+nnoremap <S-Left> :tabprevious<CR>
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
