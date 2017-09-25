@@ -72,9 +72,9 @@ let g:lightline = {
   \   'left': [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'filepath', 'modified'] ],
   \   'right': [ ['percent', 'cwd'], ['lineinfo'], ['fileformat', 'fileencoding', 'filetype'] ]
   \ },
-  \ 'component_function': { 'gitbranch': 'fugitive#head', 'filepath': 'LightLineFilePath', 'cwd': 'getcwd' }
+  \ 'component_function': { 'gitbranch': 'fugitive#head', 'filepath': 'LightLineFilepath', 'cwd': 'getcwd' }
   \ }
-function! LightLineFilePath()
+function! LightLineFilepath()
   return ('' != expand('%:p') ? expand('%:p') : '[No Name]')
 endfunction
 
@@ -120,4 +120,3 @@ abbr pry require 'pry'; binding.pry
 set ttyfast
 set lazyredraw
 set re=1
-
