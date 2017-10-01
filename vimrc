@@ -19,7 +19,8 @@ Plug 'tpope/vim-surround'
 Plug 'her/central.vim'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'tpope/vim-fugitive'
-Plug 'suan/vim-instant-markdown'
+Plug 'shime/vim-livedown'
+Plug 'fatih/vim-go'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 call plug#end()
 
@@ -72,10 +73,24 @@ let g:lightline = {
   \   'left': [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'filepath', 'modified'] ],
   \   'right': [ ['percent', 'cwd'], ['lineinfo'], ['fileformat', 'fileencoding', 'filetype'] ]
   \ },
-  \ 'component_function': { 'gitbranch': 'fugitive#head', 'filepath': 'LightLineFilepath', 'cwd': 'getcwd' }
+  \ 'component_function': { 'mode': 'LightLineMode', 'gitbranch': 'fugitive#head', 
+  \   'filepath': 'LightLineFilepath', 'cwd': 'getcwd', 'fileformat': 'LightLineFileformat', 
+  \   'filetype': 'LightLineFiletype', 'fileencoding': 'LightLineFileencoding' }
   \ }
 function! LightLineFilepath()
   return ('' != expand('%:p') ? expand('%:p') : '[No Name]')
+endfunction
+function! LightLineMode()
+  return winwidth(0) > 120 ? lightline#mode() : lightline#mode()[0]
+endfunction
+function! LightLineFileformat()
+  return winwidth(0) > 120 ? &fileformat : ''
+endfunction
+function! LightLineFiletype()
+  return winwidth(0) > 120 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+function! LightLineFileencoding()
+  return winwidth(0) > 120 ? (&fenc !=# '' ? &fenc : &enc) : ''
 endfunction
 
 " VimCompletesMe
@@ -113,6 +128,9 @@ let g:netrw_liststyle=3
 let g:netrw_browse_split=4
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
+
+" vim-livedown
+let g:livedown_autorun = 1
 
 " Ruby stuff
 abbr pry require 'pry'; binding.pry
