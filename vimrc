@@ -38,6 +38,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
+set t_Co=16
 set mouse=a
 set shell=bash
 set laststatus=2
@@ -68,14 +69,15 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 
 " lightline
 let g:lightline = {
-  \ 'colorscheme': 'PaperColor_light',
+  \ 'colorscheme': 'enlighten',
   \ 'active': {
   \   'left': [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'filepath', 'modified'] ],
   \   'right': [ ['percent', 'cwd'], ['lineinfo'], ['fileformat', 'fileencoding', 'filetype'] ]
   \ },
   \ 'component_function': { 'mode': 'LightLineMode', 'gitbranch': 'fugitive#head', 
   \   'filepath': 'LightLineFilepath', 'cwd': 'getcwd', 'fileformat': 'LightLineFileformat', 
-  \   'filetype': 'LightLineFiletype', 'fileencoding': 'LightLineFileencoding' }
+  \   'filetype': 'LightLineFiletype', 'fileencoding': 'LightLineFileencoding', 
+  \   'lineinfo': 'LightLineLineinfo'}
   \ }
 function! LightLineFilepath()
   return ('' != expand('%:p') ? expand('%:p') : '[No Name]')
@@ -91,6 +93,9 @@ function! LightLineFiletype()
 endfunction
 function! LightLineFileencoding()
   return winwidth(0) > 120 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+function! LightLineLineinfo()
+  return winwidth(0) > 120 ? printf("%3d:%-2d", line('.'), col('.')) : ''
 endfunction
 
 " VimCompletesMe
