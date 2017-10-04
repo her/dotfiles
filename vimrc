@@ -75,12 +75,12 @@ let g:lightline = {
   \   'right': [ ['percent', 'cwd'], ['lineinfo'], ['fileformat', 'fileencoding', 'filetype'] ]
   \ },
   \ 'component_function': { 'mode': 'LightLineMode', 'gitbranch': 'fugitive#head', 
-  \   'filepath': 'LightLineFilepath', 'cwd': 'getcwd', 'fileformat': 'LightLineFileformat', 
+  \   'filepath': 'LightLineFilepath', 'cwd': 'LightLineCwd', 'fileformat': 'LightLineFileformat', 
   \   'filetype': 'LightLineFiletype', 'fileencoding': 'LightLineFileencoding', 
-  \   'lineinfo': 'LightLineLineinfo'}
+  \   'lineinfo': 'LightLineLineinfo', 'percent': 'LightLinePercent'}
   \ }
 function! LightLineFilepath()
-  return ('' != expand('%:p') ? expand('%:p') : '[No Name]')
+  return winwidth(0) < 120 ? '' : ('' != expand('%:p') ? expand('%:p') : '[No Name]')
 endfunction
 function! LightLineMode()
   return winwidth(0) > 120 ? lightline#mode() : lightline#mode()[0]
@@ -96,6 +96,12 @@ function! LightLineFileencoding()
 endfunction
 function! LightLineLineinfo()
   return winwidth(0) > 120 ? printf("%3d:%-2d", line('.'), col('.')) : ''
+endfunction
+function! LightLinePercent()
+  return winwidth(0) < 120 ? '' : (100 * line('.') / line('$')) . '%'
+endfunction
+function! LightLineCwd()
+ return winwidth(0) < 120 ? '' : getcwd()
 endfunction
 
 " VimCompletesMe
