@@ -79,29 +79,29 @@ let g:lightline = {
   \   'filetype': 'LightLineFiletype', 'fileencoding': 'LightLineFileencoding', 
   \   'lineinfo': 'LightLineLineinfo', 'percent': 'LightLinePercent'}
   \ }
-function! LightLineFilepath()
-  return winwidth(0) < 120 ? '' : ('' != expand('%:p') ? expand('%:p') : '[No Name]')
-endfunction
 function! LightLineMode()
-  return winwidth(0) > 120 ? lightline#mode() : lightline#mode()[0]
+  return winwidth(0) > 80 ? lightline#mode() : lightline#mode()[0]
+endfunction
+function! LightLinePercent()
+  return winwidth(0) < 80 ? '' : (100 * line('.') / line('$')) . '%'
+endfunction
+function! LightLineLineinfo()
+  return winwidth(0) > 80 ? printf("%3d:%-2d", line('.'), col('.')) : ''
 endfunction
 function! LightLineFileformat()
   return winwidth(0) > 120 ? &fileformat : ''
 endfunction
-function! LightLineFiletype()
-  return winwidth(0) > 120 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
 function! LightLineFileencoding()
   return winwidth(0) > 120 ? (&fenc !=# '' ? &fenc : &enc) : ''
 endfunction
-function! LightLineLineinfo()
-  return winwidth(0) > 120 ? printf("%3d:%-2d", line('.'), col('.')) : ''
+function! LightLineFiletype()
+  return winwidth(0) > 120 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 endfunction
-function! LightLinePercent()
-  return winwidth(0) < 120 ? '' : (100 * line('.') / line('$')) . '%'
+function! LightLineFilepath()
+  return winwidth(0) < 150 ? '' : ('' != expand('%:p') ? expand('%:p') : '[No Name]')
 endfunction
 function! LightLineCwd()
- return winwidth(0) < 120 ? '' : getcwd()
+ return winwidth(0) < 200 ? '' : getcwd()
 endfunction
 
 " VimCompletesMe
