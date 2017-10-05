@@ -30,8 +30,6 @@ set smartindent
 set relativenumber
 set textwidth=80
 set backspace=indent,eol,start
-hi LineNr ctermfg=8
-hi CursorLineNr ctermfg=0
 
 set expandtab
 set tabstop=2
@@ -41,9 +39,12 @@ set softtabstop=2
 set t_Co=16
 set mouse=a
 set shell=bash
-set laststatus=2
 set encoding=utf8
+
+set laststatus=2
 set background=light
+hi LineNr ctermfg=8
+hi CursorLineNr ctermfg=0
 
 set hlsearch
 set wildmenu
@@ -64,6 +65,7 @@ nnoremap <S-Right> :tabnext<CR>
 nnoremap <S-Left> :tabprevious<CR>
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
+autocmd FileType netrw setlocal bufhidden=delete
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 
