@@ -1,4 +1,4 @@
-# dotfiles 💎
+# dotfiles🌲
 
 ### vimrc 🖤
 Install vim-plug
@@ -9,15 +9,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 ### .link.sh 🔗
 Symlink dotfiles to `~/`. Delete old symlinks. 
-
-### Enlighten 👩‍🎨
-enlighten.terminal theme found [here](https://github.com/her/enlighten). This is
-a light theme that I made and enjoy. After downloading just open it with Terminal.app and it will auto import.
-
-```shell
-curl -fLo ~/Downloads/enlighten.terminal \
-  https://raw.githubusercontent.com/her/enlighten/master/enlighten.terminal
-```
 
 ### Git Completion ✨
 Enables tab completion for git commands. Grab it with this:
