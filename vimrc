@@ -45,6 +45,7 @@ set laststatus=2
 set background=light
 hi LineNr ctermfg=8
 hi CursorLineNr ctermfg=0
+hi WildMenu ctermbg=15
 
 set hlsearch
 set wildmenu
