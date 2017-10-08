@@ -1,9 +1,11 @@
 [color]
-        ui = auto
+  ui = auto
 [core]
-        editor= vim
+  editor= vim
 [merge]
-        conflictstyle = diff3
+  conflictstyle = diff3
 [user]
-        email = hello@berkley.io 
-        name = melanie
+  email = hello@berkley.io 
+  name = melanie
+[diff]
+	tool = vimdiff
