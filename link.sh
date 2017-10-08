@@ -1,14 +1,13 @@
 #!/bin/bash
 
-#
 # Creates symbolic links for miscellaneous configuration files.
-# TODO make directory locations relative for portability
 
 # Initializing variables.
+CURL='/usr/bin/curl'
+CURLARGS="-f -L"
+
 dir=~/etc/dotfiles
 trash=~/etc/dotfiles_old
-files="
-"
 
 dotfiles="
   vimrc
@@ -23,12 +22,9 @@ mkdir -p $trash
 echo "Changing to $dir"
 cd $dir
 
-# Removing and replacing old files. Creating symbolic links for new files.
-echo "Removing and replacing old files. Creating symbolic links for new files."
-for file in $files; do
-  mv ~/$file ~/etc/dotfiles_old/
-  ln -s ~/etc/dotfiles/$file ~/$file
-done
+# Copy bash profile.
+echo "Adding bash profile."
+cp bash_profile ~/.bash_profile
 
 # Removing and replacing old dotfiles. Creating symbolic links for new dotfiles.
 echo "Removing and replacing old dotfiles. Creating symbolic links for new dotfiles."
@@ -41,3 +37,21 @@ done
 echo "Removing trash."
 cd ~/etc
 rm -rf dotfiles_old/
+
+# Download Git Completion 
+echo "Downloading Git Completion."
+GCHTTP="https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+$CURL $CURLARGS $GCHTTP > ~/.git-completion.bash
+
+# Download enlighten.terminal 
+echo "Downloading enlighten.terminal"
+EHTTP="https://raw.githubusercontent.com/her/enlighten/master/enlighten.terminal"
+$CURL $CURLARGS $EHTTP > ~/Downloads/enlighten.terminal
+echo "Downloaded to ~/Downloads open with terminal.app to auto import"
+
+# Install Homebrew
+if test ! $(which brew); then
+    echo "Installing homebrew..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else echo "Homebrew already installed."
+fi
