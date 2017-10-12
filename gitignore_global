@@ -1,0 +1,4 @@
+.DS_Store
+*.vim
+tags
+node_modules

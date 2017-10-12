@@ -12,6 +12,7 @@ trash=~/etc/dotfiles_old
 dotfiles="
   vimrc
   gitconfig
+  gitignore_global
 "
 
 # First check if Xcode command line tools are installed

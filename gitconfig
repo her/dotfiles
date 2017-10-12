@@ -2,6 +2,7 @@
   ui = auto
 [core]
   editor= vim
+	excludesfile = /Users/melanie/.gitignore_global
 [merge]
   conflictstyle = diff3
 [user]
