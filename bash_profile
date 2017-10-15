@@ -20,6 +20,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
 
+# redis
+export PATH="/usr/local/opt/redis@3.2/bin:$PATH"
+
 # Colorized output
 alias ls="ls -G"
 
