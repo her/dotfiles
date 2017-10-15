@@ -23,6 +23,8 @@ Plug 'fatih/vim-go'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 call plug#end()
 
+colorscheme enlighten
+
 set number
 set autoindent
 set smartindent
@@ -41,9 +43,6 @@ set mouse=a
 set shell=bash
 set encoding=utf8
 
-set laststatus=2
-colorscheme enlighten
-
 set hlsearch
 set wildmenu
 set incsearch
@@ -56,6 +55,27 @@ set ttimeoutlen=0
 set updatetime=100
 set timeoutlen=1000
 
+set laststatus=2
+set statusline=
+set statusline+=%#Normal#                      " highlight
+set statusline+=\ %{fugitive#head()}           " git
+set statusline+=\ \|                           " seperator
+set statusline+=\ %F                           " filepath
+set statusline+=\ \|                           " seperator
+set statusline+=\ %t                           " filename
+set statusline+=\ %m                           " modified
+set statusline+=%h                             " helpfile
+set statusline+=%r                             " read only
+set statusline+=%=                             " left/right separator
+set statusline+=%{strlen(&fenc)?&fenc:'none'}  " file encoding
+set statusline+=\ %{&ff}                       " file format
+set statusline+=\ %Y                           " filetype
+set statusline+=\ \|                           " separator
+set statusline+=\ %l:%c                        " line/column
+set statusline+=\ %p%%                         " percent through file
+set statusline+=\ \|                           " separator
+set statusline+=\ %{getcwd()}                  " cwd
+
 set pastetoggle=<F3>
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
@@ -67,26 +87,6 @@ autocmd FileType netrw setlocal bufhidden=delete
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FileType help wincmd L
-
-set statusline=
-set statusline+=%#Normal#                        " highlight
-set statusline+=\ %{fugitive#head()}             " git
-set statusline+=\ \|                             " seperator
-set statusline+=\ %F                             " filepath
-set statusline+=\ \|                             " seperator
-set statusline+=\ %t                             " filename
-set statusline+=%m                               " modified
-set statusline+=%h                               " helpfile
-set statusline+=%r                               " read only
-set statusline+=%=                               " left/right separator
-set statusline+=%{strlen(&fenc)?&fenc:'none'}    " file encoding
-set statusline+=\ %{&ff}                         " file format
-set statusline+=\ %Y                             " filetype
-set statusline+=\ \|                             " separator
-set statusline+=\ %l:%c                          " line/column
-set statusline+=\ %p%%                           " percent through file
-set statusline+=\ \|                             " separator
-set statusline+=\ %{getcwd()}                    " cwd
 
 " VimCompletesMe
 setlocal complete+=k/usr/share/dict/words
