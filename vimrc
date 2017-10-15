@@ -4,7 +4,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'itchyny/lightline.vim'
 Plug 'ajh17/VimCompletesMe'
 Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
@@ -67,43 +66,27 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 autocmd FileType netrw setlocal bufhidden=delete
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FileType help wincmd L
 
-" lightline
-let g:lightline = {
-  \ 'colorscheme': 'enlighten',
-  \ 'active': {
-  \   'left': [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'filepath', 'modified'] ],
-  \   'right': [ ['percent', 'cwd'], ['lineinfo'], ['fileformat', 'fileencoding', 'filetype'] ]
-  \ },
-  \ 'component_function': { 'mode': 'LightLineMode', 'gitbranch': 'fugitive#head', 
-  \   'filepath': 'LightLineFilepath', 'cwd': 'LightLineCwd', 'fileformat': 'LightLineFileformat', 
-  \   'filetype': 'LightLineFiletype', 'fileencoding': 'LightLineFileencoding', 
-  \   'lineinfo': 'LightLineLineinfo', 'percent': 'LightLinePercent'}
-  \ }
-function! LightLineMode()
-  return winwidth(0) > 80 ? lightline#mode() : lightline#mode()[0]
-endfunction
-function! LightLinePercent()
-  return winwidth(0) < 80 ? '' : (100 * line('.') / line('$')) . '%'
-endfunction
-function! LightLineLineinfo()
-  return winwidth(0) > 80 ? printf("%3d:%-2d", line('.'), col('.')) : ''
-endfunction
-function! LightLineFileformat()
-  return winwidth(0) > 120 ? &fileformat : ''
-endfunction
-function! LightLineFileencoding()
-  return winwidth(0) > 120 ? (&fenc !=# '' ? &fenc : &enc) : ''
-endfunction
-function! LightLineFiletype()
-  return winwidth(0) > 120 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-function! LightLineFilepath()
-  return winwidth(0) < 150 ? '' : ('' != expand('%:p') ? expand('%:p') : '[No Name]')
-endfunction
-function! LightLineCwd()
- return winwidth(0) < 200 ? '' : getcwd()
-endfunction
+set statusline=
+set statusline+=%#Normal#                        " highlight
+set statusline+=\ %{fugitive#head()}             " git
+set statusline+=\ \|                             " seperator
+set statusline+=\ %F                             " filepath
+set statusline+=\ \|                             " seperator
+set statusline+=\ %t                             " filename
+set statusline+=%m                               " modified
+set statusline+=%h                               " helpfile
+set statusline+=%r                               " read only
+set statusline+=%=                               " left/right separator
+set statusline+=%{strlen(&fenc)?&fenc:'none'}    " file encoding
+set statusline+=\ %{&ff}                         " file format
+set statusline+=\ %Y                             " filetype
+set statusline+=\ \|                             " separator
+set statusline+=\ %l:%c                          " line/column
+set statusline+=\ %p%%                           " percent through file
+set statusline+=\ \|                             " separator
+set statusline+=\ %{getcwd()}                    " cwd
 
 " VimCompletesMe
 setlocal complete+=k/usr/share/dict/words
