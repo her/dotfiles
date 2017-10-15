@@ -7,7 +7,6 @@ CURL='/usr/bin/curl'
 CURLARGS="-f -L"
 
 dir=~/etc/dotfiles
-trash=~/etc/dotfiles_old
 
 dotfiles="
   vimrc
@@ -39,11 +38,6 @@ if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
       echo "Homebrew already installed. Skipping..."
     fi
 
-    # Making a temporary directory to store trash.
-    echo
-    echo "Making a temporary directory to store trash."
-    mkdir -p $trash
-
     # Changing directory.
     echo "Changing to $dir"
     cd $dir
@@ -55,14 +49,9 @@ if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
     # Removing and replacing old dotfiles. Creating symbolic links for new dotfiles.
     echo "Removing and replacing old dotfiles. Creating symbolic links for new dotfiles."
     for dotfile in $dotfiles; do
-      mv ~/.$dotfile ~/etc/dotfiles_old/
+      rm ~/.$dotfile
       ln -s ~/etc/dotfiles/$dotfile ~/.$dotfile
     done
-
-    # Removing the trash.
-    echo "Removing trash."
-    cd ~/etc
-    rm -rf dotfiles_old/
 
     # Download Git Completion
     echo
