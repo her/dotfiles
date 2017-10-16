@@ -18,55 +18,57 @@ dotfiles="
 echo "Checking for Xcode Command Line Tools..."
 if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
   test -d "${xpath}" && test -x "${xpath}" ; then
-  echo "Ok"
+  echo "Ok ✅"
   echo
 
   # Prompt user before running link.sh
   read -p "Setup environment and install Homebrew? y/N " -n 1 -r
   echo
 
-  if [[ $REPLY =~ ^[Yy]$ ]]
-  then
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
 
     # Install Homebrew if not already installed
     if test ! $(which brew); then
       echo
-      echo "Installing homebrew..."
+      echo "Installing homebrew...🍻"
       ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
       echo
-      echo "Homebrew already installed. Skipping..."
+      echo "Homebrew already installed. Skipping... ✅"
     fi
 
-    # Changing directory.
-    echo "Changing to $dir"
-    cd $dir
-
-    # Copy bash profile.
-    echo "Adding bash profile."
-    cp bash_profile ~/.bash_profile
-
     # Removing and replacing old dotfiles. Creating symbolic links for new dotfiles.
-    echo "Removing and replacing old dotfiles. Creating symbolic links for new dotfiles."
+    echo "Removing and replacing old dotfiles. Creating symbolic links for new dotfiles. 💕"
+    cd $dir
+    cp bash_profile ~/.bash_profile
     for dotfile in $dotfiles; do
       rm ~/.$dotfile
       ln -s ~/etc/dotfiles/$dotfile ~/.$dotfile
     done
 
-    # Download Git Completion
-    echo
-    echo "Downloading Git Completion."
-    GCHTTP="https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
-    $CURL $CURLARGS $GCHTTP > ~/.git-completion.bash
+    # Download Git Completion if it doesn't exist.
+    if [ -e $HOME/.git-completion.bash ]; then
+      echo "Git Completion already exists. Skipping... ✅"
+    else
+      echo
+      echo "Downloading Git Completion."
+      GCHTTP="https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+      $CURL $CURLARGS $GCHTTP > ~/.git-completion.bash
+    fi
 
-    # Download enlighten.terminal
-    echo
-    echo "Downloading enlighten.terminal to ~/Downloads open with terminal.app to auto import."
-    EHTTP="https://raw.githubusercontent.com/her/enlighten/master/terminal/enlighten.terminal"
-    $CURL $CURLARGS $EHTTP > ~/Downloads/enlighten.terminal
+    # Download enlighten.terminal if we don't have it.
+    # This really only works for fresh installs, need a better way to check...
+    if grep "enlighten" ~/Library/Preferences/com.apple.Terminal.plist > /dev/null; then
+      echo "You're already using enlighten.terminal! Skipping... ✅"
+    else
+      echo
+      echo "Downloading enlighten.terminal to ~/Downloads open with terminal.app to auto import."
+      EHTTP="https://raw.githubusercontent.com/her/enlighten/master/terminal/enlighten.terminal"
+      $CURL $CURLARGS $EHTTP > ~/Downloads/enlighten.terminal
+    fi
 
     echo
-    echo "Finished."
+    echo "Finished. 💁🏼"
   else
     echo "Aborted."
   fi
