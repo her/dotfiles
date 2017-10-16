@@ -16,14 +16,12 @@ Plug 'unblevable/quick-scope'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'her/central.vim'
+Plug 'her/line'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'tpope/vim-fugitive'
 Plug 'shime/vim-livedown'
 Plug 'fatih/vim-go'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 call plug#end()
-
-colorscheme enlighten
 
 set number
 set autoindent
@@ -43,6 +41,9 @@ set mouse=a
 set shell=bash
 set encoding=utf8
 
+colorscheme enlighten
+set laststatus=2
+
 set hlsearch
 set wildmenu
 set incsearch
@@ -54,29 +55,6 @@ set tags=./tags,tags;
 set ttimeoutlen=0
 set updatetime=100
 set timeoutlen=1000
-
-set laststatus=2
-set statusline=
-set statusline+=%#Normal#                      " highlight
-set statusline+=%{mode()}                      " mode
-set statusline+=\ \|                           " seperator
-set statusline+=\ %{fugitive#head()}           " git
-set statusline+=\ \|                           " seperator
-set statusline+=\ %F                           " filepath
-set statusline+=\ \|                           " seperator
-set statusline+=\ %t                           " filename
-set statusline+=\ %m                           " modified
-set statusline+=%h                             " helpfile
-set statusline+=%r                             " read only
-set statusline+=%=                             " left/right separator
-set statusline+=%{strlen(&fenc)?&fenc:'none'}  " file encoding
-set statusline+=\ %{&ff}                       " file format
-set statusline+=\ %Y                           " filetype
-set statusline+=\ \|                           " separator
-set statusline+=\ %l:%c                        " line/column
-set statusline+=\ %p%%                         " percent through file
-set statusline+=\ \|                           " separator
-set statusline+=\ %{getcwd()}                  " cwd
 
 set pastetoggle=<F3>
 nnoremap <bs> <c-w>W
