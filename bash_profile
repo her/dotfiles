@@ -26,6 +26,9 @@ export PATH="/usr/local/opt/redis@3.2/bin:$PATH"
 # Colorized output
 alias ls="ls -G"
 
+# DynamoDB
+alias dynamo="java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb"
+
 # Color man pages
 man() {
 	env \
