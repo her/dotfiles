@@ -6,9 +6,10 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'ajh17/VimCompletesMe'
 Plug 'w0rp/ale'
-Plug 'mxw/vim-jsx'
-Plug 'jelera/vim-javascript-syntax'
 Plug 'gorodinskiy/vim-coloresque'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
