@@ -25,11 +25,14 @@ Plug 'shime/vim-livedown'
 Plug 'fatih/vim-go'
 call plug#end()
 
+
 set number
 set autoindent
 set smartindent
 set relativenumber
 set textwidth=80
+set showbreak=↪\ 
+set list listchars=eol:¬
 set backspace=indent,eol,start
 
 set expandtab
