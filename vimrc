@@ -25,13 +25,12 @@ Plug 'shime/vim-livedown'
 Plug 'fatih/vim-go'
 call plug#end()
 
-
 set number
 set autoindent
 set smartindent
 set relativenumber
 set textwidth=80
-set showbreak=↪\
+set showbreak=↪\ 
 set list listchars=tab:»\ ,extends:›,precedes:‹,nbsp:~,trail:·,eol:¬
 set backspace=indent,eol,start
 
@@ -72,6 +71,7 @@ autocmd FileType help wincmd L
 autocmd FileType json setlocal conceallevel=0
 autocmd FileType netrw setlocal bufhidden=delete
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd FileType go set nolist
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 
 " VimCompletesMe
