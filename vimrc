@@ -29,10 +29,10 @@ set number
 set autoindent
 set smartindent
 set relativenumber
-set textwidth=80
 set showbreak=↪\ 
-set list listchars=tab:»\ ,extends:›,precedes:‹,nbsp:~,trail:·,eol:¬
+set textwidth=80
 set backspace=indent,eol,start
+set list listchars=tab:»\ ,extends:›,precedes:‹,nbsp:~,trail:·,eol:¬
 
 set expandtab
 set tabstop=2
