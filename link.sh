@@ -10,6 +10,7 @@ dir=~/etc/dotfiles
 
 dotfiles="
   vimrc
+  curlrc
   gitconfig
   gitignore_global
 "
