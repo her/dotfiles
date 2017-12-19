@@ -42,7 +42,7 @@ alias ls="ls -G"
 alias dynamo="java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb"
 
 # grep
-export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=test --exclude-dir=log --exclude-dir=coverage --exclude-dir=tmp --exclude-dir=vendor --exclude-dir=data"
+export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=test --exclude-dir=log --exclude-dir=coverage --exclude-dir=tmp --exclude-dir=vendor --exclude-dir=data --exclude-dir=public"
 
 # Color man pages
 man() {
