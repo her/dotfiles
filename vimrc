@@ -27,7 +27,6 @@ call plug#end()
 
 set number
 set autoindent
-set smartindent
 set relativenumber
 set showbreak=↪\ 
 set textwidth=80
