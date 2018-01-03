@@ -31,8 +31,8 @@ export PATH="/usr/local/opt/redis@3.2/bin:$PATH"
 
 # go
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export GOPATH=$HOME/go
-export GOBIN=$HOME/go/bin
+export GOPATH=$HOME/work/go
+export GOBIN=$HOME/work/go/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Colorized output
