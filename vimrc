@@ -98,6 +98,9 @@ let g:rainbow#blacklist = range(15, 255)
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 autocmd VimEnter * RainbowParentheses 
 
+" indent line
+let g:indentLine_fileTypeExclude = ['json']
+
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
