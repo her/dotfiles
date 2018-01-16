@@ -15,6 +15,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'unblevable/quick-scope'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'her/line'
 Plug 'her/enlighten'
@@ -67,7 +68,6 @@ nnoremap <S-Left> :tabprevious<CR>
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 autocmd FileType help wincmd L
-autocmd FileType json setlocal conceallevel=0
 autocmd FileType netrw setlocal bufhidden=delete
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType go set nolist
@@ -97,9 +97,6 @@ let g:rainbow#max_level = 15
 let g:rainbow#blacklist = range(15, 255)
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 autocmd VimEnter * RainbowParentheses 
-
-" indent line
-let g:indentLine_fileTypeExclude = ['json']
 
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
