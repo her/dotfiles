@@ -15,7 +15,7 @@ export PATH=/usr/local/bin:$PATH
 export PATH=~/Library/Python/3.6/bin:$PATH
 # aws-creds script
 # usage: aws-creds [MFA] [OPTIONS...]
-source aws-creds.sh
+source .aws-creds.sh
 
 #ruby
 eval "$(rbenv init -)"
