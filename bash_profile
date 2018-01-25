@@ -1,5 +1,11 @@
 PS1="\w "
 
+# \vim will ignore the alias
+#alias vim="nvim"
+#alias vi="nvim"
+#alias vimdiff='nvim -d'
+#export EDITOR=nvim
+
 # History wont record command preceded by a space
 HISTCONTROL="ignorespace"
 
