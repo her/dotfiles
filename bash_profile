@@ -1,13 +1,9 @@
 PS1="\w "
 
-# \vim will ignore the alias
-#alias vim="nvim"
-#alias vi="nvim"
-#alias vimdiff='nvim -d'
-#export EDITOR=nvim
-
 # History wont record command preceded by a space
 HISTCONTROL="ignorespace"
+HISTFILESIZE=1000000
+HISTSIZE=1000000
 
 # git
 if [ -f ~/.git-completion.bash ]; then
@@ -21,7 +17,7 @@ export PATH=/usr/local/bin:$PATH
 export PATH=~/Library/Python/3.6/bin:$PATH
 # aws-creds script
 # usage: aws-creds [MFA] [OPTIONS...]
-source .aws-creds.sh
+source /Users/melanie/.aws-creds.sh
 
 #ruby
 eval "$(rbenv init -)"
@@ -48,7 +44,8 @@ alias ls="ls -G"
 alias dynamo="java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb"
 
 # grep
-export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=test --exclude-dir=log --exclude-dir=coverage --exclude-dir=tmp --exclude-dir=vendor --exclude-dir=data --exclude-dir=public"
+# TODO This should probably be turned into a script that can set these on the fly
+export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules  --exclude-dir=log --exclude-dir=coverage --exclude-dir=tmp --exclude-dir=vendor --exclude-dir=data --exclude-dir=public"
 
 # Color man pages
 man() {
@@ -62,3 +59,17 @@ man() {
     LESS_TERMCAP_us=$(printf "\e[1;32m") \
       man "$@"
 }
+
+# logbook
+function lb() {
+  vim ~/work/logbook/$(date '+%Y-%m-%d').md
+}
+
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# qmake
+export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
+
+# name the title of your shell window
+source /Users/melanie/.title.sh
+
