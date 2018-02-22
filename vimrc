@@ -22,7 +22,7 @@ Plug 'her/enlighten'
 Plug 'her/central.vim'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'tpope/vim-fugitive'
-Plug 'shime/vim-livedown'
+Plug 'euclio/vim-markdown-composer'
 Plug 'fatih/vim-go'
 call plug#end()
 
