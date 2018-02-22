@@ -8,6 +8,9 @@ tags
 /coverage
 /cassettes
 
+# python
+/env
+
 # production
 /build
 
