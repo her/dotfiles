@@ -72,6 +72,7 @@ autocmd FileType netrw setlocal bufhidden=delete
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType go set nolist
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 
 " VimCompletesMe
 setlocal complete+=k/usr/share/dict/words
