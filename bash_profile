@@ -1,4 +1,8 @@
-PS1="\w "
+PS1="\[$(tput bold)\]"
+PS1+="\[$(tput setaf 12)\]\w "
+PS1+="\[$(tput setaf 8)\]$ "
+PS1+="\[$(tput sgr0)\]"
+export PS1
 
 # History wont record command preceded by a space
 HISTCONTROL="ignorespace"
@@ -45,7 +49,7 @@ alias dynamo="java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.ja
 
 # grep
 # TODO This should probably be turned into a script that can set these on the fly
-export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules  --exclude-dir=log --exclude-dir=coverage --exclude-dir=tmp --exclude-dir=vendor --exclude-dir=data --exclude-dir=public"
+export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules"
 
 # Color man pages
 man() {
