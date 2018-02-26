@@ -24,6 +24,7 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'tpope/vim-fugitive'
 Plug 'euclio/vim-markdown-composer'
 Plug 'fatih/vim-go'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 set number
