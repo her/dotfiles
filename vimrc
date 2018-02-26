@@ -33,7 +33,7 @@ set relativenumber
 set showbreak=↪\ 
 set textwidth=80
 set backspace=indent,eol,start
-set list listchars=tab:»\ ,extends:›,precedes:‹,nbsp:~,trail:·,eol:¬
+set list listchars=tab:⇥\ ,extends:›,precedes:‹,nbsp:~,trail:·,eol:¬
 
 set expandtab
 set tabstop=2
