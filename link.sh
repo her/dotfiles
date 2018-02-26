@@ -42,6 +42,7 @@ if type xcode-select >&- && xpath=$( xcode-select --print-path ) &&
     echo "Removing and replacing old dotfiles. Creating symbolic links for new dotfiles. 💕"
     cd $dir
     cp bash_profile ~/.bash_profile
+    cp bashrc ~/.bashrc
     for dotfile in $dotfiles; do
       rm ~/.$dotfile
       ln -s ~/etc/dotfiles/$dotfile ~/.$dotfile
