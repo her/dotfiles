@@ -111,6 +111,5 @@ let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
 " Ruby stuff
 abbr pry require 'pry'; binding.pry
 " stops ruby from being slow :( 
-set ttyfast
-set lazyredraw
-set re=1
+set regexpengine=1 " use old engine
+"set regexpengine=2 " use new engine
