@@ -84,14 +84,14 @@ autocmd FileType c,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandta
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 
 " ale
-let g:ale_fixers = {}
-let g:ale_sign_error = "🔸"
-let g:ale_sign_warning = "🔹"
 let g:ale_sign_column_always = 0
+let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint']
 let g:ale_javascript_eslint_executable = '.eslintrc.js'
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
+let g:ale_sign_error = "◉"
+let g:ale_sign_warning = "◉"
+highlight ALEErrorSign ctermfg=9 ctermbg=15
+highlight ALEWarningSign ctermfg=11 ctermbg=15
 
 " vim-jsx
 let g:jsx_ext_required = 1
