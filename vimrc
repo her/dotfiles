@@ -108,9 +108,6 @@ let g:netrw_winsize=25
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
 
-" vim-livedown
-let g:livedown_autorun = 1
-
 " Ruby stuff
 abbr pry require 'pry'; binding.pry
 " stops ruby from being slow :( 
