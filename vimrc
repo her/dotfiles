@@ -4,27 +4,31 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'ajh17/VimCompletesMe'
 Plug 'w0rp/ale'
-Plug 'gorodinskiy/vim-coloresque'
+Plug 'ajh17/VimCompletesMe'
+Plug 'Yggdroot/indentLine'
+
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+Plug 'tpope/vim-surround'
+Plug 'Raimondi/delimitMate'
+Plug 'unblevable/quick-scope'
+Plug 'terryma/vim-multiple-cursors'
+
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'Yggdroot/indentLine'
-Plug 'unblevable/quick-scope'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rbenv'
+Plug 'fatih/vim-go'
+Plug 'szw/vim-tags'
+
+Plug 'gerw/vim-HiLinkTrace'
+
+Plug 'euclio/vim-markdown-composer'
 Plug 'her/line'
 Plug 'her/enlighten'
 Plug 'her/central.vim'
-Plug 'gerw/vim-HiLinkTrace'
-Plug 'tpope/vim-fugitive'
-Plug 'euclio/vim-markdown-composer'
-Plug 'fatih/vim-go'
-Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 set number
