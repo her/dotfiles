@@ -51,6 +51,7 @@ set t_Co=16
 set mouse=a
 set shell=bash
 set encoding=utf8
+set foldmethod=manual
 
 colorscheme enlighten
 set laststatus=2
