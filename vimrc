@@ -69,6 +69,8 @@ set updatetime=100
 set timeoutlen=1000
 
 set pastetoggle=<F3>
+map <Space> <Leader>
+map <Leader>; :ls<CR>
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
 nnoremap <S-Right> :tabnext<CR>
