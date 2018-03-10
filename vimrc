@@ -45,6 +45,7 @@ set shiftwidth=2
 set softtabstop=2
 
 set splitright
+set splitbelow
 set t_Co=16
 set mouse=a
 set shell=bash
