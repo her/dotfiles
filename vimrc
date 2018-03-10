@@ -83,12 +83,6 @@ autocmd FileType go set nolist
 autocmd FileType c,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 
-" VimCompletesMe
-setlocal complete+=k/usr/share/dict/words
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-autocmd FileType ruby,python let b:vcm_tab_complete = "omni"
-autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
-
 " ale
 let g:ale_fixers = {}
 let g:ale_sign_error = "🔸"
