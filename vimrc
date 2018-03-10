@@ -96,12 +96,6 @@ highlight ALEWarningSign ctermfg=11 ctermbg=15
 " vim-jsx
 let g:jsx_ext_required = 1
 
-" rainbow parentheses
-let g:rainbow#max_level = 15
-let g:rainbow#blacklist = range(15, 255)
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-autocmd VimEnter * RainbowParentheses 
-
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
