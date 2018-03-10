@@ -80,7 +80,7 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 autocmd FileType help wincmd L
 autocmd FileType netrw setlocal bufhidden=delete
 autocmd FileType go set nolist
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FileType c,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 
 " VimCompletesMe
