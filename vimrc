@@ -26,10 +26,12 @@ Plug 'szw/vim-tags'
 Plug 'gerw/vim-HiLinkTrace'
 
 Plug 'euclio/vim-markdown-composer'
-Plug 'her/line'
 Plug 'her/enlighten'
 Plug 'her/central.vim'
 call plug#end()
+
+set fillchars=stl:―,stlnc:—,vert:│,fold:۰
+set statusline=\ %#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'+':''}%{&readonly?'🔒\ ':''}\ [%t]%=%<\[Buf:%n]\ %Y\ %l:%c\ %p%%\ 
 
 set number
 set autoindent
@@ -71,6 +73,8 @@ set timeoutlen=1000
 set pastetoggle=<F3>
 map <Space> <Leader>
 map <Leader>; :ls<CR>
+map <Leader>p :bprevious<CR>
+map <Leader>n :bnext<CR>
 nnoremap <bs> <c-w>W
 nnoremap <Tab> <c-w>w
 nnoremap <S-Right> :tabnext<CR>
@@ -92,6 +96,9 @@ let g:ale_sign_error = "◉"
 let g:ale_sign_warning = "◉"
 highlight ALEErrorSign ctermfg=9 ctermbg=15
 highlight ALEWarningSign ctermfg=11 ctermbg=15
+
+"indentline
+let g:indentLine_setColors = 0
 
 " vim-jsx
 let g:jsx_ext_required = 1
