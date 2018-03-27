@@ -84,7 +84,7 @@ man() {
 
 # logbook
 function lb() {
-  vim ~/work/logbook/$1_$(date '+%Y-%m-%d').md
+  vim ~/work/logbook/$1$(date '+%Y-%m-%d').md
 }
 
 export PATH="$HOME/.cargo/bin:$PATH"
