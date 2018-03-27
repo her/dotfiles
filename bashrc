@@ -33,9 +33,11 @@ fi
 
 # Python3 (homebrew)
 export PATH=/usr/local/bin:$PATH
+alias activate="source env/bin/activate"
 
 # aws-cli
 export PATH=~/Library/Python/3.6/bin:$PATH
+complete -C aws_completer aws
 # aws-creds script
 # usage: aws-creds [MFA] [OPTIONS...]
 source /Users/melanie/.aws-creds.sh
@@ -82,7 +84,7 @@ man() {
 
 # logbook
 function lb() {
-  vim ~/work/logbook/$(date '+%Y-%m-%d').md
+  vim ~/work/logbook/$1_$(date '+%Y-%m-%d').md
 }
 
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -91,5 +93,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 
 # name the title of your shell window
-source /Users/melanie/.title.sh
-
+function title () {
+  local pkg=title
+  if [[ ! $1 ]]; then
+    echo "$pkg: missing required argument: title name" 1>&2
+    return 99
+  fi
+  echo "Window Title renamed to $1"
+  echo -n -e "\033]0;$1\007"
+}
