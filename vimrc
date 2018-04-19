@@ -13,7 +13,6 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tpope/vim-surround'
 Plug 'Raimondi/delimitMate'
-Plug 'unblevable/quick-scope'
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'mxw/vim-jsx'
@@ -26,6 +25,9 @@ Plug 'szw/vim-tags'
 Plug 'gerw/vim-HiLinkTrace'
 
 Plug 'euclio/vim-markdown-composer'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
 Plug 'her/enlighten'
 Plug 'her/central.vim'
 call plug#end()
@@ -56,6 +58,7 @@ set encoding=utf8
 set foldmethod=manual
 
 colorscheme enlighten
+set synmaxcol=300
 set laststatus=2
 
 set hlsearch
@@ -87,6 +90,13 @@ autocmd FileType go set nolist
 autocmd FileType c,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 
+augroup RubySettings
+    autocmd!
+    autocmd FileType ruby setlocal complete-=i
+    autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
+    autocmd FileType ruby setlocal regexpengine=1
+augroup END
+
 " ale
 let g:ale_sign_column_always = 0
 let g:ale_fixers = {}
@@ -94,17 +104,14 @@ let g:ale_fixers.javascript = ['eslint']
 let g:ale_javascript_eslint_executable = '.eslintrc.js'
 let g:ale_sign_error = "◉"
 let g:ale_sign_warning = "◉"
-highlight ALEErrorSign ctermfg=9 ctermbg=15
-highlight ALEWarningSign ctermfg=11 ctermbg=15
+hi link ALEErrorSign Red
+hi link ALEWarningSign BrightYellow
 
 "indentline
 let g:indentLine_setColors = 0
 
 " vim-jsx
 let g:jsx_ext_required = 1
-
-" quick-scope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " netrw
 let g:netrw_altv=1
@@ -115,8 +122,6 @@ let g:netrw_winsize=25
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
 
-" Ruby stuff
-abbr pry require 'pry'; binding.pry
-" stops ruby from being slow :( 
-set regexpengine=1 " use old engine
-"set regexpengine=2 " use new engine
+" markdown
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
