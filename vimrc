@@ -7,29 +7,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
 Plug 'ajh17/VimCompletesMe'
 Plug 'Yggdroot/indentLine'
-
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-
 Plug 'tpope/vim-surround'
-Plug 'Raimondi/delimitMate'
-Plug 'terryma/vim-multiple-cursors'
-
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rbenv'
-Plug 'fatih/vim-go'
-Plug 'szw/vim-tags'
-
 Plug 'gerw/vim-HiLinkTrace'
-
-Plug 'euclio/vim-markdown-composer'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-
 Plug 'her/enlighten'
 Plug 'her/central.vim'
+" Languages
+Plug 'mxw/vim-jsx' | Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
+Plug 'euclio/vim-markdown-composer', { 'for': 'md' }
+Plug 'fatih/vim-go', { 'for': 'go' }
 call plug#end()
 
 set fillchars=stl:―,stlnc:—,vert:│,fold:۰
@@ -58,7 +45,6 @@ set encoding=utf8
 set foldmethod=manual
 
 colorscheme enlighten
-set synmaxcol=300
 set laststatus=2
 
 set hlsearch
@@ -73,7 +59,6 @@ set ttimeoutlen=0
 set updatetime=100
 set timeoutlen=1000
 
-set pastetoggle=<F3>
 map <Space> <Leader>
 map <Leader>; :ls<CR>
 map <Leader>p :bprevious<CR>
@@ -91,10 +76,12 @@ autocmd FileType c,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandta
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 
 augroup RubySettings
-    autocmd!
-    autocmd FileType ruby setlocal complete-=i
-    autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
-    autocmd FileType ruby setlocal regexpengine=1
+  autocmd!
+  autocmd FileType ruby setlocal complete-=i
+  autocmd FileType ruby setlocal synmaxcol=300
+  autocmd FileType ruby setlocal regexpengine=1
+  autocmd FileType ruby setlocal norelativenumber
+  autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
 augroup END
 
 " ale
@@ -121,7 +108,3 @@ let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
-
-" markdown
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_conceal = 0
