@@ -33,7 +33,9 @@ fi
 
 # Python3 (homebrew)
 export PATH=/usr/local/bin:$PATH
-alias activate="source env/bin/activate"
+alias setup="python3 -m venv .env_venv"
+alias activate="source .env_venv/bin/activate"
+alias unittest="python -m unittest"
 
 # aws-cli
 export PATH=~/Library/Python/3.6/bin:$PATH
@@ -81,6 +83,9 @@ man() {
     LESS_TERMCAP_us=$(printf "\e[1;32m") \
       man "$@"
 }
+
+export CLICOLOR=1
+export LSCOLORS=exfxcxdxbxhghdabagacad
 
 # logbook
 function lb() {
