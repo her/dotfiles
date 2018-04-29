@@ -11,6 +11,7 @@ dir=~/etc/dotfiles
 dotfiles="
   vimrc
   curlrc
+  psqlrc
   gitconfig
   gitignore_global
 "
