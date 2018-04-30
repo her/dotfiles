@@ -59,15 +59,13 @@ set ttimeoutlen=0
 set updatetime=100
 set timeoutlen=1000
 
-map <Space> <Leader>
-map <Leader>; :ls<CR>
-map <Leader>p :bprevious<CR>
-map <Leader>n :bnext<CR>
-nnoremap <bs> <c-w>W
-nnoremap <Tab> <c-w>w
-nnoremap <S-Right> :tabnext<CR>
-nnoremap <S-Left> :tabprevious<CR>
-nnoremap <silent> <CR> :nohlsearch<CR><CR>
+nmap <Tab> <c-w>w
+nmap <silent> <CR> :nohlsearch<CR>
+
+nmap <Space> <Leader>
+nmap <Leader>n :bnext<CR>
+nmap <Leader>p :bprevious<CR>
+nmap <silent> <Leader>; :ls<CR>
 
 autocmd FileType help wincmd L
 autocmd FileType netrw setlocal bufhidden=delete
