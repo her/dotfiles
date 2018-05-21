@@ -15,8 +15,8 @@ Plug 'her/enlighten'
 Plug 'her/central.vim'
 " Languages
 Plug 'mxw/vim-jsx' | Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
-Plug 'euclio/vim-markdown-composer', { 'for': 'md' }
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'euclio/vim-markdown-composer', { 'for': ['markdown'] }
+Plug 'fatih/vim-go', { 'for': ['go'] }
 call plug#end()
 
 set fillchars=stl:―,stlnc:—,vert:│,fold:۰
@@ -61,19 +61,23 @@ set timeoutlen=1000
 
 nmap <Tab> <c-w>w
 nmap <silent> <CR> :nohlsearch<CR>
-
 nmap <Space> <Leader>
 nmap <Leader>n :bnext<CR>
 nmap <Leader>p :bprevious<CR>
 nmap <silent> <Leader>; :ls<CR>
 
+xmap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
 autocmd FileType help wincmd L
-autocmd FileType netrw setlocal bufhidden=delete
-autocmd FileType go set nolist
-autocmd FileType c,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 
-augroup RubySettings
+augroup Go | au! FileType go set nolist | augroup END
+augroup C | au! FileType c setlocal sw=4 ts=4 sts=4 et | augroup END
+augroup Netrw | au! FileType netrw setlocal bufhidden=delete | augroup END
+augroup Python | au! FileType python setlocal sw=4 ts=4 sts=4 et | augroup END
+augroup Markdown | au! BufNewFile,BufReadPost *.md set filetype=markdown | augroup END
+
+augroup Ruby
   autocmd!
   autocmd FileType ruby setlocal complete-=i
   autocmd FileType ruby setlocal synmaxcol=300
@@ -81,6 +85,11 @@ augroup RubySettings
   autocmd FileType ruby setlocal norelativenumber
   autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
 augroup END
+
+function! ExecuteMacroOverVisualRange() abort
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 " ale
 let g:ale_sign_column_always = 0
@@ -106,3 +115,7 @@ let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
+
+" Markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+let g:markdown_syntax_conceal = 0
