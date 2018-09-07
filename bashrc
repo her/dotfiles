@@ -1,3 +1,13 @@
+# Apple /usr/libexec/path_helper | man path_helper
+# https://opensource.apple.com/source/shell_cmds/shell_cmds-162/path_helper/path_helper.c
+# Set a default path here
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+# Command Line Tools, Languages, Binaries, Scipts
+PATH=$PATH:$HOME/.rbenv/shims
+PATH=$PATH:/usr/local/opt/redis@3.2/bin
+PATH=$PATH:/usr/local/opt/postgresql@9.6/bin
+PATH=$PATH:$HOME/Library/Python/3.6/bin # aws cli tool
+
 # Grab shell levels and terminal variables to dynamically set PS1
 LVL=$SHLVL
 TERM=$TERM
@@ -26,50 +36,26 @@ HISTCONTROL="ignorespace"
 HISTFILESIZE=1000000
 HISTSIZE=1000000
 
+export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules" # grep
+
 # git
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
 # Python3 (homebrew)
-export PATH=/usr/local/bin:$PATH
 alias setup="python3 -m venv .env_venv"
 alias activate="source .env_venv/bin/activate"
 alias unittest="python -m unittest"
 
 # aws-cli
-export PATH=~/Library/Python/3.6/bin:$PATH
 complete -C aws_completer aws
 # aws-creds script
 # usage: aws-creds [MFA] [OPTIONS...]
 source /Users/melanie/.aws-creds.sh
 
-#ruby
-eval "$(rbenv init -)"
-export PATH=/Users/melanie/.rbenv/shims:$PATH
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
-
-# redis
-export PATH="/usr/local/opt/redis@3.2/bin:$PATH"
-
-# go
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export GOPATH=$HOME/work/go
-export GOBIN=$HOME/work/go/bin
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
 # Colorized output
 alias ls="ls -G"
-
-# DynamoDB
-alias dynamo="java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb"
-
-# grep
-export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules"
 
 # Color man pages
 man() {
@@ -91,11 +77,6 @@ export LSCOLORS=exfxcxdxbxhghdabagacad
 function lb() {
   vim ~/work/logbook/$1$(date '+%Y-%m-%d').md
 }
-
-export PATH="$HOME/.cargo/bin:$PATH"
-
-# qmake
-export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 
 # name the title of your shell window
 function title () {
