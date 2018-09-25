@@ -29,8 +29,8 @@ HISTSIZE=1000000
 export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules" # grep
 
 # git
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+if [ -f $HOME/.git-completion.bash ]; then
+  . $HOME/.git-completion.bash
 fi
 
 # Python3 (homebrew)
@@ -42,7 +42,9 @@ alias unittest="python -m unittest"
 complete -C aws_completer aws
 # aws-creds script
 # usage: aws-creds [MFA] [OPTIONS...]
-source /Users/melanie/.aws-creds.sh
+if [ -f $HOME/.aws-creds.sh ]; then
+  . $HOME/.aws-creds.sh
+fi
 
 # Colorized output
 alias ls="ls -G"
