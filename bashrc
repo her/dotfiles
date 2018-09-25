@@ -8,21 +8,11 @@ PATH=$PATH:/usr/local/opt/redis@3.2/bin
 PATH=$PATH:/usr/local/opt/postgresql@9.6/bin
 PATH=$PATH:$HOME/Library/Python/3.6/bin # aws cli tool
 
-# Grab shell levels and terminal variables to dynamically set PS1
+# Change PS1 if SHLVL is greater than 1
 LVL=$SHLVL
-TERM=$TERM
 if [ $LVL -eq 1 ]; then
   PS1="\[$(tput bold)\]"
-  PS1+="\[$(tput setaf 0)\]\w "
-  PS1+="\[$(tput setaf 8)\]$ "
-  PS1+="\[$(tput sgr0)\]"
-  export PS1
-elif [ $TERM == "screen" ]; then
-  PS1="\[$(tput bold)\]"
-  PS1+="${STY} "
-  PS1+="${WINDOW} \w $ "
-  PS1+="\[$(tput sgr0)\]"
-  export PS1
+  PS1+="\w $ "
 else
   PS1="\[$(tput bold)\]"
   PS1+="\[$(tput setaf 1)\]\w "
