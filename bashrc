@@ -26,6 +26,9 @@ HISTCONTROL="ignorespace"
 HISTFILESIZE=1000000
 HISTSIZE=1000000
 
+# Colorized output
+alias ls="ls -G"
+
 export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules" # grep
 
 # git
@@ -45,9 +48,6 @@ complete -C aws_completer aws
 if [ -f $HOME/.aws-creds.sh ]; then
   . $HOME/.aws-creds.sh
 fi
-
-# Colorized output
-alias ls="ls -G"
 
 # Color man pages
 man() {
@@ -79,4 +79,9 @@ function title () {
   fi
   echo "Window Title renamed to $1"
   echo -n -e "\033]0;$1\007"
+}
+
+# toggles between light or dark mode on macOS
+function theme() {
+  osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
 }
