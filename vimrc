@@ -10,25 +10,19 @@ Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'gerw/vim-HiLinkTrace'
-Plug 'her/enlighten'
 Plug 'her/central.vim'
-" Languages
-Plug 'mxw/vim-jsx' | Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
-Plug 'euclio/vim-markdown-composer', { 'for': ['markdown'] }
-Plug 'fatih/vim-go', { 'for': ['go'] }
 call plug#end()
 
-set fillchars=stl:―,stlnc:—,vert:│,fold:۰
-set statusline=\ %#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'+':''}%{&readonly?'🔒\ ':''}\ [%t]%=%<\[Buf:%n]\ %Y\ %l:%c\ %p%%\ 
+set list
+set listchars=tab:>-,trail:-,nbsp:%
+set showbreak=>\
+set laststatus=1
+set fillchars=stl:―,stlnc:—
+set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%<\[Buf:%n]\ %Y\ %l:%c\ %p%%
 
-set number
 set autoindent
-set relativenumber
-set showbreak=↪\ 
 set textwidth=80
 set backspace=indent,eol,start
-set list listchars=tab:⇥\ ,extends:›,precedes:‹,nbsp:~,trail:·,eol:¬
 
 set expandtab
 set tabstop=2
@@ -38,14 +32,10 @@ set softtabstop=2
 set splitright
 set splitbelow
 set showcmd
-set t_Co=16
 set mouse=a
 set shell=bash
 set encoding=utf8
 set foldmethod=manual
-
-colorscheme enlighten
-set laststatus=2
 
 set hlsearch
 set wildmenu
@@ -66,8 +56,6 @@ nmap <Leader>n :bnext<CR>
 nmap <Leader>p :bprevious<CR>
 nmap <silent> <Leader>; :ls<CR>
 
-xmap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-
 autocmd FileType help wincmd L
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 
@@ -85,37 +73,3 @@ augroup Ruby
   autocmd FileType ruby setlocal norelativenumber
   autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
 augroup END
-
-function! ExecuteMacroOverVisualRange() abort
-  echo "@".getcmdline()
-  execute ":'<,'>normal @".nr2char(getchar())
-endfunction
-
-" ale
-let g:ale_sign_column_always = 0
-let g:ale_fixers = {}
-let g:ale_fixers.javascript = ['eslint']
-let g:ale_javascript_eslint_executable = '.eslintrc.js'
-let g:ale_sign_error = "◉"
-let g:ale_sign_warning = "◉"
-hi link ALEErrorSign Red
-hi link ALEWarningSign BrightYellow
-
-"indentline
-let g:indentLine_setColors = 0
-
-" vim-jsx
-let g:jsx_ext_required = 1
-
-" netrw
-let g:netrw_altv=1
-let g:netrw_banner=0
-let g:netrw_liststyle=3
-let g:netrw_browse_split=4
-let g:netrw_winsize=25
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide=',\(^\|\s\s\)\zs\.\S\+'
-
-" Markdown
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-let g:markdown_syntax_conceal = 0
