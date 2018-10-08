@@ -16,7 +16,7 @@ call plug#end()
 set list
 set listchars=tab:>-,trail:-,nbsp:%
 set showbreak=>\
-set laststatus=1
+set laststatus=2
 set fillchars=stl:―,stlnc:—
 set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%<\[Buf:%n]\ %Y\ %l:%c\ %p%%
 
