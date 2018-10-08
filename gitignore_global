@@ -9,7 +9,7 @@ tags
 /cassettes
 
 # python
-/env
+.env_venv
 
 # production
 /build
