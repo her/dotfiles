@@ -20,3 +20,8 @@ else
   GCHTTP="https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
   $CURL $CURLARGS $GCHTTP > $HOME/.git-completion.bash
 fi
+
+if [ -x /usr/local/bin/git ]; then
+  echo "updated core.excludesfile with gitignore global"
+  git config --global core.excludesfile $HOME/.gitignore_global
+fi
