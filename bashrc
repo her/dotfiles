@@ -29,7 +29,7 @@ HISTSIZE=1000000
 # Colorized output
 alias ls="ls -G"
 
-export GREP_OPTIONS="--color=auto --exclude=tags --exclude-dir=.git --exclude-dir=node_modules" # grep
+export GREP_OPTIONS="--color=auto"
 
 # git
 if [ -f $HOME/.git-completion.bash ]; then
