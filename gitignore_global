@@ -12,6 +12,7 @@ tags
 .env_venv
 __pycache__
 *.pyc
+*.egg-info
 
 # production
 /build
