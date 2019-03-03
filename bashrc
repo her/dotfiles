@@ -8,6 +8,9 @@ PATH=$PATH:/usr/local/opt/redis@3.2/bin
 PATH=$PATH:/usr/local/opt/postgresql@9.6/bin
 PATH=$PATH:$HOME/Library/Python/3.6/bin # aws cli tool
 
+export VISUAL=vim
+export EDITOR=vim
+
 # Change PS1 if SHLVL is greater than 1
 LVL=$SHLVL
 if [ $LVL -eq 1 ]; then
