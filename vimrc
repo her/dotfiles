@@ -6,7 +6,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
 Plug 'ajh17/VimCompletesMe'
-Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -16,12 +15,13 @@ call plug#end()
 set list
 set listchars=tab:>-,trail:-,nbsp:%
 set showbreak=>\
+
 set laststatus=2
 set fillchars=stl:―,stlnc:—
 set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%<\[Buf:%n]\ %Y\ %l:%c\ %p%%
 
 set autoindent
-set textwidth=80
+set textwidth=100
 set backspace=indent,eol,start
 
 set expandtab
