@@ -68,22 +68,6 @@ man() {
 export CLICOLOR=1
 export LSCOLORS=exfxcxdxbxhghdabagacad
 
-# logbook
-function lb() {
-  vim ~/work/logbook/$1$(date '+%Y-%m-%d').md
-}
-
-# name the title of your shell window
-function title () {
-  local pkg=title
-  if [[ ! $1 ]]; then
-    echo "$pkg: missing required argument: title name" 1>&2
-    return 99
-  fi
-  echo "Window Title renamed to $1"
-  echo -n -e "\033]0;$1\007"
-}
-
 # toggles between light or dark mode on macOS
 function theme() {
   osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
