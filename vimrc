@@ -43,7 +43,8 @@ set incsearch
 set smartcase
 set ignorecase
 set path+=**
-set tags=./tags,tags;
+set cscopetag
+set tags=./tags,tags;$HOME
 
 set ttimeoutlen=0
 set updatetime=100
