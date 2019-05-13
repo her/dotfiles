@@ -6,6 +6,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
 Plug 'ajh17/VimCompletesMe'
+Plug '/usr/local/opt/fzf'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -55,6 +56,7 @@ nmap <silent> <CR> :nohlsearch<CR>
 nmap <Space> <Leader>
 nmap <Leader>n :bnext<CR>
 nmap <Leader>p :bprevious<CR>
+nmap <Leader>f :%!python -m json.tool<CR>
 nmap <silent> <Leader>; :ls<CR>
 
 autocmd FileType help wincmd L
@@ -63,7 +65,6 @@ autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 augroup Go | au! FileType go set nolist | augroup END
 augroup C | au! FileType c setlocal sw=4 ts=4 sts=4 et | augroup END
 augroup Netrw | au! FileType netrw setlocal bufhidden=delete | augroup END
-augroup Python | au! FileType python setlocal sw=4 ts=4 sts=4 et | augroup END
 augroup Markdown | au! BufNewFile,BufReadPost *.md set filetype=markdown | augroup END
 
 augroup Ruby
@@ -73,4 +74,9 @@ augroup Ruby
   autocmd FileType ruby setlocal regexpengine=1
   autocmd FileType ruby setlocal norelativenumber
   autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
+augroup END
+
+augroup Python
+  autocmd FileType python setlocal sw=4 ts=4 sts=4 et
+  autocmd Filetype python abbreviate <buffer> pdb import pdb; pdb.set_trace()
 augroup END
