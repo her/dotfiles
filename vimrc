@@ -10,6 +10,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'her/central.vim'
+Plug 'tmsvg/pear-tree'
 call plug#end()
 
 set list
