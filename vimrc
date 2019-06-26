@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
 Plug 'ajh17/VimCompletesMe'
 Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -56,8 +57,14 @@ nmap <silent> <CR> :nohlsearch<CR>
 nmap <Space> <Leader>
 nmap <Leader>n :bnext<CR>
 nmap <Leader>p :bprevious<CR>
-nmap <Leader>f :%!python -m json.tool<CR>
+"nmap <Leader>f :%!python -m json.tool<CR>
 nmap <silent> <Leader>; :ls<CR>
+nmap <silent> <Leader>l :Lines<CR> " Lines in loaded buffers
+nmap <silent> <Leader>g :GFiles<CR> " Git files (git ls-files)
+nmap <silent> <Leader>f :Files<CR> " Similar to :FZF
+nmap <silent> <Leader>b :Buffers<CR> " Open buffers
+nmap <silent> <Leader>c :BLines<CR> " Lines in current buffer
+nmap <silent> <Leader>s :GFiles?<CR> " Git files (git status)
 
 autocmd FileType help wincmd L
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
@@ -74,6 +81,7 @@ augroup Ruby
   autocmd FileType ruby setlocal regexpengine=1
   autocmd FileType ruby setlocal norelativenumber
   autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
+  autocmd BufNewFile,BufRead *.json.jbuilder set ft=ruby
 augroup END
 
 augroup Python
