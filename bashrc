@@ -26,7 +26,7 @@ export LSCOLORS=exfxcxdxbxhghdabagacad # BSD LSCOLORS
 #export LSCOLORS=ExGxFxdxCxDxDxhbadExEx # GNU LS_COLORS (equivalent)
 
 # Tools
-export FZF_DEFAULT_OPTS="--height 80% --layout=reverse"
+export FZF_DEFAULT_OPTS="--height 80% --layout=reverse --color 16"
 export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
@@ -48,7 +48,7 @@ alias bat="bat --style='header'"
 [ -s "$HOME/.fzf.bash" ] && \. "$HOME/.fzf.bash"
 
 gsl(){
-  git log --pretty=oneline --abbrev-commit | fzf --preview-window up:25 --preview 'echo {} | cut -f 1 -d " " | xargs git show --color=always'
+  git log --pretty=oneline --abbrev-commit | fzf --preview-window down:70% --preview 'echo {} | cut -f 1 -d " " | xargs git show --color=always'
 }
 
 fe() {
@@ -59,7 +59,7 @@ fe() {
 
 # fzf and preview files
 prv(){
-  fzf --preview-window up:25 --preview '[[ $(file --mime {}) =~ binary ]] &&
+  fzf --preview-window down:70% --preview '[[ $(file --mime {}) =~ binary ]] &&
                    echo {} is a binary file ||
                    (bat --style=numbers --color=always {} ||
                     highlight -O ansi -l {} ||
@@ -125,4 +125,3 @@ color() {
     done
     printf '\e[0m \n'
 }
-
