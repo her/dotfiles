@@ -2,14 +2,14 @@
 # https://opensource.apple.com/source/shell_cmds/shell_cmds-162/path_helper/path_helper.c
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 PATH=$PATH:$HOME/.rbenv/shims
-PATH=$PATH:$HOME/.pyenv/bin
+PATH=$PATH:$HOME/.pyenv/shims
 PATH=$PATH:/usr/local/opt/redis@3.2/bin
 PATH=$PATH:/usr/local/opt/postgresql@9.6/bin
 PATH=$PATH:$HOME/Library/Python/3.7/bin
 PATH=$PATH:/usr/local/opt/imagemagick@6/bin
 
 PS1="\[$(tput bold)\]"
-PS1+="\[$(tput setaf 8)\]"
+#PS1+="\[$(tput setaf 0)\]"
 PS1+="\w $ "
 PS1+="\[$(tput sgr0)\]"
 
@@ -52,8 +52,8 @@ gsl(){
 }
 
 fe() {
-  local files
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  local files # set the variables files
+  IFS=$'\n' files=($(fd . | fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
@@ -125,3 +125,35 @@ color() {
     done
     printf '\e[0m \n'
 }
+
+# Will return non-zero status if the current directory is not managed by git
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+gt() {
+  # "Nothing to see here, move along"
+  is_in_git_repo || return
+
+  # Pass the list of the tags to fzf-tmux
+  # - "{}" in preview option is the placeholder for the highlighted entry
+  # - Preview window can display ANSI colors, so we enable --color=always
+  # - We can terminate `git show` once we have $LINES lines
+  git tag --sort -version:refname |
+    fzf-tmux --multi --preview-window right:70% \
+             --preview 'git show --color=always {} | head -'$LINES
+}
+
+#eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv init -)"
+eval "$(rbenv init -)"
+
+
+# option bindings
+# bind '"\er": redraw-current-line'
+# bind '"\C-g\C-t": "$(gt)\e\C-e\er"'
+
+dc() { docker-compose $@; }
+dssh() { docker exec -it $1 /bin/bash; }
+dcssh() { if [ -z $1 ]; then docker-compose exec $(basename `pwd`) /bin/bash; else docker-compose exec $1 /bin/bash; fi }
+dcl() { if [ -z $1 ]; then docker-compose logs -f $(basename `pwd`); else docker-compose logs -f $1; fi }
