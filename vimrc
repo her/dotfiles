@@ -4,33 +4,47 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'w0rp/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'w0rp/ale'
+
+Plug 'tmsvg/pear-tree'
+
+Plug 'arzg/vim-sh'
+Plug 'fatih/vim-go'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'vim-python/python-syntax'
+
 Plug 'airblade/vim-gitgutter'
+
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'her/central.vim'
-Plug 'tmsvg/pear-tree'
-Plug 'vim-python/python-syntax'
-Plug 'arzg/vim-sh'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-vinegar'
+
+Plug 'her/central.vim'
+Plug 'her/enlighten'
 call plug#end()
 
 set list
 set listchars=tab:>-,trail:-,nbsp:%
-set showbreak=>\
 
 set breakindent
-set laststatus=2
-set fillchars=stl:-,stlnc:-
-set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%<\[Buf:%n]\ %Y\ %l:%c\ %p%%
+set showbreak=>\
 
-"set background=light
+set laststatus=2
+set fillchars=stl:-,stlnc:^
+set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%<\[Buf:%n]\ %Y\ %l,%c\ %p%%
+
+colorscheme enlighten
+
+set showcmd
 set autoindent
 set textwidth=100
+set synmaxcol=300
 set backspace=indent,eol,start
 
 set expandtab
@@ -38,13 +52,12 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
-set showcmd
-set mouse=a
-set shell=bash
 set encoding=utf8
 set foldmethod=manual
-
-set ruler
+set mouse=a
+set shell=bash
+set ttimeoutlen=0
+set updatetime=750
 
 set hlsearch
 set wildmenu
@@ -55,20 +68,16 @@ set path+=**
 set cscopetag
 set tags=./tags,tags;$HOME
 
-set ttimeoutlen=0 " why
-set updatetime=100 " what is this
-set timeoutlen=1000 " why
-
 nmap <silent> <CR> :nohlsearch<CR>
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "nmap <Tab> <c-w>w
+"nmap <Leader>f :%!python -m json.tool<CR>
 nmap <Space> <Leader>
 nmap <Leader>n :bnext<CR>
 nmap <Leader>p :bprevious<CR>
-"nmap <Leader>f :%!python -m json.tool<CR>
-nmap <silent> <Leader>; :ls<CR>
 
 nmap <Leader>f :Files<CR>
 nmap <leader>/ :BLines<CR>
@@ -77,8 +86,8 @@ nmap <leader>b :Buffers<CR>
 nmap <leader>r :Rg |
 nmap <leader>c :Commands<CR>
 
-
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
+autocmd FileType json syntax match Comment +\/\/.\+$+  " Highlight JSON // Comments
 
 augroup Go | au! FileType go set nolist | augroup END
 augroup C | au! FileType c setlocal sw=4 ts=4 sts=4 et | augroup END
@@ -86,11 +95,6 @@ augroup Netrw | au! FileType netrw setlocal bufhidden=delete | augroup END
 augroup Markdown | au! BufNewFile,BufReadPost *.md set filetype=markdown | augroup END
 
 augroup Ruby
-  autocmd!
-  autocmd FileType ruby setlocal complete-=i
-  autocmd FileType ruby setlocal synmaxcol=300
-  autocmd FileType ruby setlocal regexpengine=1
-  autocmd FileType ruby setlocal norelativenumber
   autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
   autocmd BufNewFile,BufRead *.json.jbuilder set ft=ruby
 augroup END
@@ -99,6 +103,9 @@ augroup Python
   autocmd FileType python setlocal sw=4 ts=4 sts=4 et
   autocmd Filetype python abbreviate <buffer> pdb import pdb; pdb.set_trace()
 augroup END
+
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_files_options='--preview-window down:70% --preview "bat --style=numbers --color=always {}"'
 
 function! s:list_cmd()
   let base = fnamemodify(expand('%'), ':h:.:S')
@@ -109,15 +116,59 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
   \                               'options': '--tiebreak=index'}, <bang>0)
 
-let g:fzf_files_options='--preview-window down:70% --preview "bat --style=numbers --color=always {}"'
-let g:fzf_layout = { 'window': 'enew' }
-
-" highlights comments in JSON. Since that's not the spec this is maybe bad.
-autocmd FileType json syntax match Comment +\/\/.\+$+
-
-let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {'python': ['pylint']}
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_set_highlights = 0
 
 let g:python_highlight_all=1
+
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+
+let g:netrw_liststyle = 3
+
+" TODO Optionally include this as a debug setting in enlighten
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" TODO Make this a plugin
+function MyTabLine()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (i + 1) . 'T'
+
+    " the label is made by MyTabLabel()
+    let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+  endfor
+
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+
+  " right-align the label to close the current tab page
+  if tabpagenr('$') > 1
+    let s .= '%=%#TabLine#%999Xclose'
+  endif
+
+  return s
+endfunction
+
+function MyTabLabel(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  "return bufname(buflist[winnr - 1])
+  return fnamemodify(bufname(buflist[winnr - 1]), ':t')
+endfunction
+
+set tabline=%!MyTabLine()
