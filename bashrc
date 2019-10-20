@@ -7,11 +7,16 @@ PATH=$PATH:/usr/local/opt/redis@3.2/bin
 PATH=$PATH:/usr/local/opt/postgresql@9.6/bin
 PATH=$PATH:$HOME/Library/Python/3.7/bin
 PATH=$PATH:/usr/local/opt/imagemagick@6/bin
+PATH=$PATH:/usr/local/bin/go
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 PS1="\[$(tput bold)\]"
-#PS1+="\[$(tput setaf 0)\]"
 PS1+="\w $ "
 PS1+="\[$(tput sgr0)\]"
+
+# Languages
+export GOPATH=/Users/berkley/work/go
+PATH=$PATH:$GOPATH/bin
 
 # System
 HISTCONTROL="ignorespace"
@@ -157,3 +162,11 @@ dc() { docker-compose $@; }
 dssh() { docker exec -it $1 /bin/bash; }
 dcssh() { if [ -z $1 ]; then docker-compose exec $(basename `pwd`) /bin/bash; else docker-compose exec $1 /bin/bash; fi }
 dcl() { if [ -z $1 ]; then docker-compose logs -f $(basename `pwd`); else docker-compose logs -f $1; fi }
+
+work() { vim $(git ls-tree -r HEAD --name-only); }
+[ -r /Users/berkley/.profile_lda ] && . /Users/berkley/.profile_lda
+
+workspace() { cd $GOPATH/src/github.com/her; }
+
+# removes local branches already merged to master
+# git branch --merged master | grep -v '^[ *]*master$' | xargs git branch -d
