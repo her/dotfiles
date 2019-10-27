@@ -1,3 +1,7 @@
+PS1="\[$(tput bold)\]"
+PS1+="\w $ "
+PS1+="\[$(tput sgr0)\]"
+
 # Apple /usr/libexec/path_helper | man path_helper
 # https://opensource.apple.com/source/shell_cmds/shell_cmds-162/path_helper/path_helper.c
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -10,9 +14,14 @@ PATH=$PATH:/usr/local/opt/imagemagick@6/bin
 PATH=$PATH:/usr/local/bin/go
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-PS1="\[$(tput bold)\]"
-PS1+="\w $ "
-PS1+="\[$(tput sgr0)\]"
+# C lang
+PATH="/usr/local/opt/llvm/bin:$PATH"
+export CPATH=$(xcrun --show-sdk-path)/usr/include
+# To use the bundled libc++ please add the following LDFLAGS:
+#   LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+# For compilers to find llvm you may need to set:
+#   export LDFLAGS="-L/usr/local/opt/llvm/lib"
+#   export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
 # Languages
 export GOPATH=/Users/berkley/work/go
@@ -47,6 +56,7 @@ alias basefg="printf '\e[%sm▒' {30..37} 0; echo"
 alias basebg="printf '\e[%sm ' {40..47} 0; echo"
 alias elasticsearch="cd /Users/berkley/Library/Application\ Support/bin/elasticsearch-6.7.2/bin && ./elasticsearch && cd -"
 alias bat="bat --style='header'"
+alias vim="nvim"
 
 [ -s "$HOME/.git-completion.bash" ] && \. "$HOME/.git-completion.bash"
 [ -s "$HOME/.aws-creds.sh" ] && \. "$HOME/.aws-creds.sh" # usage: aws-creds [MFA] [OPTIONS...]
@@ -152,6 +162,7 @@ gt() {
 #eval "$(pyenv virtualenv-init -)"
 eval "$(pyenv init -)"
 eval "$(rbenv init -)"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 
 
 # option bindings
