@@ -1,0 +1,15 @@
+{
+  "solargraph.diagnostics": true,
+  "languageserver": {
+    "golang": {
+        "command": "gopls",
+        "filetypes": ["go"],
+    },
+    "clangd": {
+        "command": "clangd",
+        "args": ["--background-index", "--all-scopes-completion=true"],
+        "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+        "filetypes": ["c", "cpp", "objc", "objcpp"],
+    }
+  }
+}

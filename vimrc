@@ -120,6 +120,8 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
   \                               'options': '--tiebreak=index'}, <bang>0)
 
+let g:coc_global_extensions=['coc-pairs', 'coc-json', 'coc-solargraph']
+
 let g:python_highlight_all=1
 
 let g:gutentags_generate_on_new = 1
