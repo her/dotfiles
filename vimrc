@@ -4,13 +4,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'w0rp/ale'
-
-Plug 'tmsvg/pear-tree'
 
 Plug 'arzg/vim-sh'
 Plug 'fatih/vim-go'
@@ -37,7 +34,8 @@ set showbreak=>\
 
 set laststatus=2
 set fillchars=stl:-,stlnc:^
-set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%<\[Buf:%n]\ %Y\ %l,%c\ %p%%
+set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%{coc#status()}\ %{get(b:,'coc_current_function','')}%<\[Buf:%n]\ %Y\ %l,%c\ %p%%
+set tabline=%!MyTabLine()
 
 colorscheme enlighten
 
@@ -57,7 +55,13 @@ set foldmethod=manual
 set mouse=a
 set shell=bash
 set ttimeoutlen=0
-set updatetime=750
+set updatetime=300
+
+set signcolumn=yes
+set shortmess+=c
+set cmdheight=2
+set hidden
+
 
 set hlsearch
 set wildmenu
@@ -116,11 +120,6 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
   \                               'options': '--tiebreak=index'}, <bang>0)
 
-let g:ale_linters = {'python': ['pylint']}
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_set_highlights = 0
-
 let g:python_highlight_all=1
 
 let g:gutentags_generate_on_new = 1
@@ -171,4 +170,21 @@ function MyTabLabel(n)
   return fnamemodify(bufname(buflist[winnr - 1]), ':t')
 endfunction
 
-set tabline=%!MyTabLine()
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
