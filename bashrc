@@ -179,5 +179,17 @@ work() { vim $(git ls-tree -r HEAD --name-only); }
 
 workspace() { cd $GOPATH/src/github.com/her; }
 
+# Git Command
 # removes local branches already merged to master
 # git branch --merged master | grep -v '^[ *]*master$' | xargs git branch -d
+#
+# show changes since master
+# git log --oneline master..myBranch
+#
+# changes from tip of master to tip of branch
+# git log --oneline master...myBranch
+#
+# list of changed files
+# git diff-tree --no-commit-id --name-only -r <commit>
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

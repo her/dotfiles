@@ -120,16 +120,23 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
   \                               'options': '--tiebreak=index'}, <bang>0)
 
-let g:coc_global_extensions=['coc-pairs', 'coc-json', 'coc-solargraph']
-
 let g:python_highlight_all=1
 
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_ctags_exclude = ["*.min.js","*.min.css","build","vendor",".git","*.vim/bundle/*"]
+let g:gutentags_trace = 1
 
 let g:netrw_liststyle = 3
+
+let g:coc_global_extensions=['coc-pairs', 'coc-json', 'coc-solargraph', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-css']
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " TODO Optionally include this as a debug setting in enlighten
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -184,9 +191,3 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
