@@ -1,3 +1,11 @@
+" These are the driving requirements of this RC file.
+"
+" 1) Fuzzy file finding (open any project file quickly if you know the name)
+" 2) File Switching (see and quick switch open files, fuzzy or tree browse)
+" 3) Linting (automatic and fast, can use code fixer)
+" 4) Projet Searching (arbitrary string, symbol, definitions, usages of symbol)
+" 5) Intelligent code completion (autocompletion, reflection, docs)
+"
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   autocmd VimEnter * PlugInstall | source $MYVIMRC
@@ -24,18 +32,21 @@ Plug 'tpope/vim-vinegar'
 
 Plug 'her/central.vim'
 Plug 'her/enlighten'
+
+Plug 'psliwka/vim-smoothie'
 call plug#end()
 
 set list
 set listchars=tab:>-,trail:-,nbsp:%
 
 set breakindent
-set showbreak=>\
+set showbreak=\|\ \ \ \ 
 
 set laststatus=2
 set fillchars=stl:-,stlnc:^
 set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%{coc#status()}\ %{get(b:,'coc_current_function','')}%<\[Buf:%n]\ %Y\ %l,%c\ %p%%
-set tabline=%!MyTabLine()
+set tabline=%!SimpleTabline()
+set statusline+=%{gutentags#statusline()}
 
 colorscheme enlighten
 
@@ -62,7 +73,6 @@ set shortmess+=c
 set cmdheight=2
 set hidden
 
-
 set hlsearch
 set wildmenu
 set incsearch
@@ -74,8 +84,8 @@ set tags=./tags,tags;$HOME
 
 nmap <silent> <CR> :nohlsearch<CR>
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "nmap <Tab> <c-w>w
 "nmap <Leader>f :%!python -m json.tool<CR>
@@ -92,6 +102,7 @@ nmap <leader>c :Commands<CR>
 
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd FileType json syntax match Comment +\/\/.\+$+  " Highlight JSON // Comments
+autocmd FileType markdown syntax match markdownError "\w\@<=\w\@="
 
 augroup Go | au! FileType go set nolist | augroup END
 augroup C | au! FileType c setlocal sw=4 ts=4 sts=4 et | augroup END
@@ -120,23 +131,18 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
   \                               'options': '--tiebreak=index'}, <bang>0)
 
+let g:coc_global_extensions=['coc-pairs', 'coc-json', 'coc-solargraph', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-css', 'coc-python']
+
 let g:python_highlight_all=1
 
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_empty_buffer = 0
-let g:gutentags_ctags_exclude = ["*.min.js","*.min.css","build","vendor",".git","*.vim/bundle/*"]
-let g:gutentags_trace = 1
+
+let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "*.vim/bundle/*"]
 
 let g:netrw_liststyle = 3
-
-let g:coc_global_extensions=['coc-pairs', 'coc-json', 'coc-solargraph', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-css']
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 
 " TODO Optionally include this as a debug setting in enlighten
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -144,7 +150,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " TODO Make this a plugin
-function MyTabLine()
+function SimpleTabline()
   let s = ''
   for i in range(tabpagenr('$'))
     " select the highlighting
@@ -157,8 +163,8 @@ function MyTabLine()
     " set the tab page number (for mouse clicks)
     let s .= '%' . (i + 1) . 'T'
 
-    " the label is made by MyTabLabel()
-    let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+    " the label is made by TabTitle()
+    let s .= ' %{TabTitle(' . (i + 1) . ')} '
   endfor
 
   " after the last tab fill with TabLineFill and reset tab page nr
@@ -172,7 +178,7 @@ function MyTabLine()
   return s
 endfunction
 
-function MyTabLabel(n)
+function TabTitle(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
   "return bufname(buflist[winnr - 1])
@@ -191,3 +197,9 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
