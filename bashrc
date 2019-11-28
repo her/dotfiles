@@ -146,6 +146,9 @@ is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
 }
 
+# option bindings
+# bind '"\er": redraw-current-line'
+# bind '"\C-g\C-t": "$(gt)\e\C-e\er"'
 gt() {
   # "Nothing to see here, move along"
   is_in_git_repo || return
@@ -165,10 +168,6 @@ eval "$(rbenv init -)"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 
 
-# option bindings
-# bind '"\er": redraw-current-line'
-# bind '"\C-g\C-t": "$(gt)\e\C-e\er"'
-
 dc() { docker-compose $@; }
 dssh() { docker exec -it $1 /bin/bash; }
 dcssh() { if [ -z $1 ]; then docker-compose exec $(basename `pwd`) /bin/bash; else docker-compose exec $1 /bin/bash; fi }
@@ -179,7 +178,7 @@ work() { vim $(git ls-tree -r HEAD --name-only); }
 
 workspace() { cd $GOPATH/src/github.com/her; }
 
-# Git Command
+# Git Commands
 # removes local branches already merged to master
 # git branch --merged master | grep -v '^[ *]*master$' | xargs git branch -d
 #
@@ -191,5 +190,11 @@ workspace() { cd $GOPATH/src/github.com/her; }
 #
 # list of changed files
 # git diff-tree --no-commit-id --name-only -r <commit>
+#
+# open all tracked files
+# vim $(git ls-tree -r HEAD --name-only | grep -v -i "assets\|migrate\|public")
+
+# postgres
+# postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
