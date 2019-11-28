@@ -1,5 +1,7 @@
 {
   "solargraph.diagnostics": true,
+  "eslint.autoFixOnSave": true,
+  "diagnostic.checkCurrentLine": true,
   "languageserver": {
     "golang": {
         "command": "gopls",
