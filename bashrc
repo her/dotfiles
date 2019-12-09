@@ -33,14 +33,14 @@ HISTFILESIZE=1000000
 HISTSIZE=1000000
 
 export VISUAL=vim
-export EDITOR=vim
+export EDITOR=nvim
 export GREP_OPTIONS="--color=auto"
 export CLICOLOR=1 # needed for LSCOLORS
 export LSCOLORS=exfxcxdxbxhghdabagacad # BSD LSCOLORS
 #export LSCOLORS=ExGxFxdxCxDxDxhbadExEx # GNU LS_COLORS (equivalent)
 
 # Tools
-export FZF_DEFAULT_OPTS="--height 80% --layout=reverse --color 16"
+export FZF_DEFAULT_OPTS="--height 80% --layout=reverse --no-color"
 export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
@@ -69,7 +69,7 @@ gsl(){
 fe() {
   local files # set the variables files
   IFS=$'\n' files=($(fd . | fzf-tmux --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+  [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
 }
 
 # fzf and preview files
@@ -172,6 +172,9 @@ dc() { docker-compose $@; }
 dssh() { docker exec -it $1 /bin/bash; }
 dcssh() { if [ -z $1 ]; then docker-compose exec $(basename `pwd`) /bin/bash; else docker-compose exec $1 /bin/bash; fi }
 dcl() { if [ -z $1 ]; then docker-compose logs -f $(basename `pwd`); else docker-compose logs -f $1; fi }
+
+show() { defaults write com.apple.finder CreateDesktop -bool true; killall Finder; }
+hide() { defaults write com.apple.finder CreateDesktop -bool false; killall Finder; }
 
 work() { vim $(git ls-tree -r HEAD --name-only); }
 [ -r /Users/berkley/.profile_lda ] && . /Users/berkley/.profile_lda
