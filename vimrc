@@ -32,6 +32,7 @@ Plug 'tpope/vim-vinegar'
 
 Plug 'her/central.vim'
 Plug 'her/enlighten'
+Plug 'her/after'
 
 Plug 'psliwka/vim-smoothie'
 call plug#end()
@@ -84,11 +85,6 @@ set tags=./tags,tags;$HOME
 
 nmap <silent> <CR> :nohlsearch<CR>
 
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-"nmap <Tab> <c-w>w
-"nmap <Leader>f :%!python -m json.tool<CR>
 nmap <Space> <Leader>
 nmap <Leader>n :bnext<CR>
 nmap <Leader>p :bprevious<CR>
@@ -99,6 +95,14 @@ nmap <Leader>\ :Lines<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>r :Rg |
 nmap <leader>c :Commands<CR>
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd FileType json syntax match Comment +\/\/.\+$+  " Highlight JSON // Comments
@@ -119,87 +123,18 @@ augroup Python
   autocmd Filetype python abbreviate <buffer> pdb import pdb; pdb.set_trace()
 augroup END
 
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_files_options='--preview-window down:70% --preview "bat --style=numbers --color=always {}"'
-
-function! s:list_cmd()
-  let base = fnamemodify(expand('%'), ':h:.:S')
-  return base == '.' ? 'fd -t f' : printf('fd -t f -p %s; fd -t f -E %s', base, base)
-endfunction
-
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
-  \                               'options': '--tiebreak=index'}, <bang>0)
-
-let g:coc_global_extensions=['coc-pairs', 'coc-json', 'coc-solargraph', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-css', 'coc-python']
-
 let g:python_highlight_all=1
 
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 0
-
-let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "*.vim/bundle/*"]
-
 let g:netrw_liststyle = 3
+
+let g:coc_global_extensions=['coc-pairs', 'coc-json',
+      \ 'coc-solargraph', 'coc-tsserver', 'coc-eslint',
+      \ 'coc-prettier', 'coc-css', 'coc-python']
+
+let g:fzf_files_options='--preview-window down:70% --preview-window down:wrap --preview "cat {}"'
+let g:fzf_layout = { 'window': 'call SearchWindow()' }
 
 " TODO Optionally include this as a debug setting in enlighten
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-" TODO Make this a plugin
-function SimpleTabline()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    " select the highlighting
-    if i + 1 == tabpagenr()
-      let s .= '%#TabLineSel#'
-    else
-      let s .= '%#TabLine#'
-    endif
-
-    " set the tab page number (for mouse clicks)
-    let s .= '%' . (i + 1) . 'T'
-
-    " the label is made by TabTitle()
-    let s .= ' %{TabTitle(' . (i + 1) . ')} '
-  endfor
-
-  " after the last tab fill with TabLineFill and reset tab page nr
-  let s .= '%#TabLineFill#%T'
-
-  " right-align the label to close the current tab page
-  if tabpagenr('$') > 1
-    let s .= '%=%#TabLine#%999Xclose'
-  endif
-
-  return s
-endfunction
-
-function TabTitle(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  "return bufname(buflist[winnr - 1])
-  return fnamemodify(bufname(buflist[winnr - 1]), ':t')
-endfunction
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
