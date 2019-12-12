@@ -13,3 +13,12 @@ open vim
 :g/if has('conceal')/s//& \&\& 0/
 :wq
 ```
+
+🐳 Docker binds detach over `<C-e>` and `<C-p>`. To reverse this behavior
+set a config within `.docker/config.json`
+
+```
+{
+  "detachKeys": "ctrl-q,ctrl-q"
+}
+```
