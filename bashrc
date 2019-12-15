@@ -44,7 +44,7 @@ export FZF_DEFAULT_OPTS="--height 80% --layout=reverse --no-color"
 export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
-export BAT_THEME=OneHalfLight
+export BAT_THEME=base16
 export JAVA_HOME=$HOME/Library/Application\ Support/bin/elasticsearch-6.7.2/jdk-12.0.2.jdk/Contents/Home
 export NVM_DIR="$HOME/.nvm"
 
@@ -74,7 +74,7 @@ fe() {
 
 # fzf and preview files
 prv(){
-  fzf --preview-window down:70% --preview '[[ $(file --mime {}) =~ binary ]] &&
+  fd . | fzf --preview-window down:70% --preview '[[ $(file --mime {}) =~ binary ]] &&
                    echo {} is a binary file ||
                    (bat --style=numbers --color=always {} ||
                     highlight -O ansi -l {} ||
@@ -173,6 +173,8 @@ dssh() { docker exec -it $1 /bin/bash; }
 dcssh() { if [ -z $1 ]; then docker-compose exec $(basename `pwd`) /bin/bash; else docker-compose exec $1 /bin/bash; fi }
 dcl() { if [ -z $1 ]; then docker-compose logs -f $(basename `pwd`); else docker-compose logs -f $1; fi }
 
+g() { git status | fzf | awk '{print $2}' | xargs -I '{}' git $1 '{}'; }
+
 show() { defaults write com.apple.finder CreateDesktop -bool true; killall Finder; }
 hide() { defaults write com.apple.finder CreateDesktop -bool false; killall Finder; }
 
@@ -199,5 +201,16 @@ workspace() { cd $GOPATH/src/github.com/her; }
 
 # postgres
 # postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
+#
+# Examples
+#
+# postgresql://
+# postgresql://localhost
+# postgresql://localhost:5432
+# postgresql://localhost/mydb
+# postgresql://user@localhost
+# postgresql://user:secret@localhost
+# postgresql://other@localhost/otherdb?connect_timeout=10&application_name=myapp
+# postgresql://localhost/mydb?user=other&password=secret
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
