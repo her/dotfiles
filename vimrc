@@ -132,6 +132,7 @@ augroup END
 augroup Python
   autocmd FileType python setlocal sw=4 ts=4 sts=4 et
   autocmd Filetype python abbreviate <buffer> pdb import pdb; pdb.set_trace()
+  autocmd Filetype python abbreviate <buffer> ipy import IPython; IPython.embed(colors="neutral")
 augroup END
 
 let g:python_highlight_all=1
