@@ -1,0 +1,15 @@
+#!/bin/bash
+set -eo pipefail
+trap 'kill $pids' INT TERM
+
+run(){
+  prefix=${PWD##*/}
+  size=$((13 - ${#prefix}))
+  $@ > >(sed 's/^/'"$(tput setaf $(((RANDOM % 10) + 1)))"' '""$(date -u +"%H:%M:%S")""' '"${PWD##*/}"' '"$(printf "%-${size}s")"' | '"$(tput sgr0)"'/') &
+  pids="$pids $(jobs -p %%)"
+}
+
+cd $HOME && run echo 'Hello World!'
+
+wait
+exit 0
