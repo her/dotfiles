@@ -16,12 +16,14 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
 
 Plug 'arzg/vim-sh'
 Plug 'fatih/vim-go'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'pangloss/vim-javascript'
 Plug 'vim-python/python-syntax'
+Plug 'sentientmachine/Pretty-Vim-Python'
 
 Plug 'airblade/vim-gitgutter'
 
@@ -29,6 +31,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-rsi'
 
 Plug 'her/central.vim'
 Plug 'her/enlighten'
@@ -53,7 +56,6 @@ colorscheme enlighten
 
 set showcmd
 set autoindent
-set textwidth=100
 set synmaxcol=300
 set backspace=indent,eol,start
 
@@ -62,6 +64,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
+set clipboard+=unnamedplus
 set encoding=utf8
 set foldmethod=manual
 set mouse=a
@@ -86,8 +89,10 @@ set tags=./tags,tags;$HOME
 nmap <silent> <CR> :nohlsearch<CR>
 
 nmap <Space> <Leader>
-nmap <Leader>n :bnext<CR>
-nmap <Leader>p :bprevious<CR>
+nmap <S-tab> gt
+" what about previous?
+" nmap <Leader>n :bnext<CR>
+" nmap <Leader>p :bprevious<CR>
 
 nmap <Leader>f :Files<CR>
 nmap <leader>/ :BLines<CR>
@@ -100,10 +105,11 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent><leader>i <Plug>(coc-diagnostic-info)
+nmap <silent><leader>n <Plug>(coc-diagnostic-next)
+nmap <silent><leader>p <Plug>(coc-diagnostic-prev)
 
 nmap <leader>rn <Plug>(coc-rename)
-" inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -139,7 +145,7 @@ let g:python_highlight_all=1
 
 let g:netrw_liststyle = 3
 
-let g:coc_global_extensions=['coc-pairs', 'coc-json',
+let g:coc_global_extensions=['coc-json',
       \ 'coc-solargraph', 'coc-tsserver', 'coc-eslint',
       \ 'coc-prettier', 'coc-css', 'coc-python']
 
@@ -156,6 +162,8 @@ endfunction
 
 let g:fzf_files_options='--preview-window down:70% --preview-window down:wrap --preview "cat {}"'
 let g:fzf_layout = { 'window': 'call SearchWindow()' }
+let g:fzf_preview_window = 'down:50%'
+
 
 " TODO Optionally include this as a debug setting in enlighten
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
