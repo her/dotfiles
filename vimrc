@@ -17,6 +17,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
+Plug 'justinmk/vim-dirvish'
+Plug 'junegunn/goyo.vim'
 
 Plug 'arzg/vim-sh'
 Plug 'fatih/vim-go'
@@ -48,14 +50,25 @@ set showbreak=\|\ \ \ \
 
 set laststatus=2
 set fillchars=stl:-,stlnc:^
-set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%{coc#status()}\ %{get(b:,'coc_current_function','')}%<\[Buf:%n]\ %Y\ %l,%c\ %p%%
+set statusline=\%#Directory#%{fugitive#head()}%#LineNr#\ %{&modified?'[+]':''}%{&readonly?'RO':''}\ [%t]%=%{coc#status()}\ %{get(b:,'coc_current_function','')}\ %<\[Buf:%n]\ %Y\ %l,%c\ %p%%
 set tabline=%!SimpleTabline()
 set statusline+=%{gutentags#statusline()}
+
+let g:markdown_fenced_languages = ['ruby']
+
+" :h pythonx
+" :call health#coc#check()
+" TODO: This is not working for some reason, needs investigating
+"set pyxversion=3
+
+let g:coc_status_error_sign = 'E'
+let g:coc_status_warning_sign = 'W'
 
 colorscheme enlighten
 
 set showcmd
 set autoindent
+"set textwidth=100
 set synmaxcol=300
 set backspace=indent,eol,start
 
@@ -76,6 +89,7 @@ set signcolumn=yes
 set shortmess+=c
 set cmdheight=2
 set hidden
+set splitright
 
 set hlsearch
 set wildmenu
@@ -86,13 +100,14 @@ set path+=**
 set cscopetag
 set tags=./tags,tags;$HOME
 
-nmap <silent> <CR> :nohlsearch<CR>
-
-nmap <Space> <Leader>
-nmap <S-tab> gt
 " what about previous?
 " nmap <Leader>n :bnext<CR>
 " nmap <Leader>p :bprevious<CR>
+nmap <silent> <CR> :nohlsearch<CR>
+
+nmap <Space> <Leader>
+
+nmap <S-tab> gt
 
 nmap <Leader>f :Files<CR>
 nmap <leader>/ :BLines<CR>
@@ -110,15 +125,35 @@ nmap <silent><leader>n <Plug>(coc-diagnostic-next)
 nmap <silent><leader>p <Plug>(coc-diagnostic-prev)
 
 nmap <leader>rn <Plug>(coc-rename)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
+"let g:netrw_liststyle = 3
+let g:loaded_netrwPlugin = 1
+command! -nargs=? -complete=dir Explore Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use K to show documentation in preview window
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
 
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
@@ -143,23 +178,12 @@ augroup END
 
 let g:python_highlight_all=1
 
-let g:netrw_liststyle = 3
-
 let g:coc_global_extensions=['coc-json',
       \ 'coc-solargraph', 'coc-tsserver', 'coc-eslint',
       \ 'coc-prettier', 'coc-css', 'coc-python']
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
+" coc-fzf
+let coc_fzf_preview='down:70%'
 let g:fzf_files_options='--preview-window down:70% --preview-window down:wrap --preview "cat {}"'
 let g:fzf_layout = { 'window': 'call SearchWindow()' }
 let g:fzf_preview_window = 'down:50%'
