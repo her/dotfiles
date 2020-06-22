@@ -3,13 +3,16 @@ set -eo pipefail
 trap 'kill $pids' INT TERM
 
 run(){
-  prefix=${PWD##*/}
-  size=$((13 - ${#prefix}))
-  $@ > >(sed 's/^/'"$(tput setaf $(((RANDOM % 10) + 1)))"' '""$(date -u +"%H:%M:%S")""' '"${PWD##*/}"' '"$(printf "%-${size}s")"' | '"$(tput sgr0)"'/') &
+  tag=${@: -1} # Last ARGV use a 'tag'
+  set -- "${@:1:$(($#-1))}" # delete the tag from the arg list
+
+  prefix="${PWD##*/} $tag"
+  size=$((24 - ${#prefix}))
+  $@ > >(sed 's/^/'"$(tput setaf $(((RANDOM % 10) + 1)))"' '""$(date -u +"%H:%M:%S")""' '"$prefix"' '"$(printf "%-${size}s")"' | '"$(tput sgr0)"'/') &
   pids="$pids $(jobs -p %%)"
 }
 
-cd $HOME && run echo 'Hello World!'
+cd $HOME && run ls 'my-tag'
 
 wait
 exit 0
