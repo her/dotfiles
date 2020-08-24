@@ -1,6 +1,3 @@
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-
 export PS1="\w $ "
 
 # Apple /usr/libexec/path_helper | man path_helper
@@ -77,3 +74,4 @@ eval "$(rbenv init -)"
 eval "$(pyenv init -)"
 eval "$(nodenv init -)"
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
