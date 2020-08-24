@@ -1,17 +1,18 @@
 {
+  "prettier.semi": true,
   "solargraph.diagnostics": true,
   "eslint.autoFixOnSave": true,
   "diagnostic.checkCurrentLine": true,
   "languageserver": {
     "golang": {
         "command": "gopls",
-        "filetypes": ["go"],
+        "filetypes": ["go"]
     },
     "clangd": {
         "command": "clangd",
         "args": ["--background-index", "--all-scopes-completion=true"],
         "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-        "filetypes": ["c", "cpp", "objc", "objcpp"],
+        "filetypes": ["c", "cpp", "objc", "objcpp"]
     }
   }
 }

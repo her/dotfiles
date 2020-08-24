@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Usage: color {n|{start..stop}}
+for c; do
+    printf '\e[48;5;%dm%03d' $c $c
+done
+printf '\e[0m \n'
+

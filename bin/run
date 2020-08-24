@@ -1,0 +1,27 @@
+#!/bin/bash
+set -eo pipefail
+trap 'kill $pids' INT TERM
+
+run(){
+  # Read the last argument as a 'tag'
+  tag=${@: -1}
+
+  # rest argv and drop the tag
+  set -- "${@:1:$(($#-1))}"
+
+  prefix="${PWD##*/} $tag"
+
+  # Adjust size accordingly if items do not align. default: 14
+  size=$((14 - ${#prefix}))
+  line="$(tput setaf $(((RANDOM % 10) + 1))) $(date -u +"%H:%M:%S") $prefix $(printf "%-${size}s") | $(tput sgr0)"
+  $@ > >(sed 's/^/'"$line"'/') &
+
+  # TODO: Add some association for pids and tags to enable `$ run stop <tag>` or `$ run start <tag>`
+  pids="$pids $(jobs -p %%)"
+}
+
+# dir                           command                                  tag
+cd $HOME                     && run ls                                   'my-tag'
+
+wait
+exit 0

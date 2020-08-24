@@ -15,8 +15,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+Plug 'voldikss/vim-floaterm'
+
 Plug 'mkitt/tabline.vim'
-Plug 'mhinz/vim-startify'
+
+Plug 'hardcoreplayers/dashboard-nvim'
+
+Plug 'darfink/vim-plist'
+
+Plug 'ruanyl/vim-gh-line'
 
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
@@ -27,19 +34,16 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
 
-Plug 'her/synicons.vim'
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
+Plug 'ms-jpq/chadtree', {'branch': 'chad'}
 
 Plug 'arzg/vim-sh'
 Plug 'fatih/vim-go'
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'chrisbra/Colorizer'
-"Plug 'vim-python/python-syntax'
-"Plug 'sentientmachine/Pretty-Vim-Python'
-
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+Plug 'chrisbra/Colorizer'
+
 
 Plug 'airblade/vim-gitgutter'
 
@@ -54,6 +58,9 @@ Plug 'her/central.vim'
 Plug 'her/enlighten'
 
 Plug 'psliwka/vim-smoothie'
+
+Plug 'her/synicons.vim'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 set list
@@ -132,14 +139,16 @@ nmap <silent><leader>n <Plug>(coc-diagnostic-next)
 nmap <silent><leader>p <Plug>(coc-diagnostic-prev)
 nmap <leader>rn <Plug>(coc-rename)
 
+nnoremap <leader>v <cmd>CHADopen<cr>
+
 noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
 noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
 noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
 noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
 noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+" noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+" noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
 noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
 noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
 
@@ -168,20 +177,50 @@ augroup Python
   autocmd Filetype python abbreviate <buffer> ipy import IPython; IPython.embed(colors="neutral")
 augroup END
 
+augroup Javascript
+  autocmd Filetype javascript,javascriptreact imap cll console.log();<Esc>==f(a
+  autocmd Filetype javascript,javascriptreact vmap cll yocll<Esc>p
+  autocmd Filetype javascript,javascriptreact nmap cll yiwocll<Esc>p 
+augroup END
+
+augroup auto_colorize
+  autocmd!
+  autocmd
+        \ BufNewFile,BufRead,BufEnter,BufLeave,WinEnter,WinLeave,WinNew
+        \ *.js,*.css,*.scss,*.sass,*.less
+        \ ColorHighlight
+augroup END
+
+function MyCustomHighlights()
+    hi semshiLocal            ctermfg=1   guifg=#ff875f
+    hi semshiGlobal           ctermfg=3   guifg=#ffaf00
+    hi semshiImported         ctermfg=3   guifg=#ffaf00 cterm=bold gui=bold
+    hi semshiParameter        ctermfg=4   guifg=#5fafff
+    hi semshiParameterUnused  ctermfg=7   guifg=#87d7ff cterm=underline gui=underline
+    hi semshiFree             ctermfg=13  guifg=#ffafd7
+    hi semshiBuiltin          ctermfg=5   guifg=#ff5fff
+    hi semshiAttribute        ctermfg=2   guifg=#00ffaf
+    hi semshiSelf             ctermfg=249 guifg=#b2b2b2
+    hi semshiUnresolved       ctermfg=8   guifg=#ffff00 cterm=underline gui=underline
+    hi semshiSelected         ctermfg=11  guifg=#ffffff ctermbg=161 guibg=#d7005f
+
+"     hi semshiErrorSign        ctermfg=9   guifg=#ffffff guibg=#d70000
+"     hi semshiErrorChar        ctermfg=9   guifg=#ffffff guibg=#d70000
+endfunction
+
+autocmd ColorScheme * call MyCustomHighlights()
+
+let g:semshi#filetypes = ["python"]
+
+" Dashboard
+let g:dashboard_default_executive = 'fzf'
+
 let g:sessions_dir = '~/.vim/sessions'
 exec 'nnoremap <Leader>ss :mksession! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 exec 'nnoremap <Leader>sr :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
 
-let g:startify_session_dir = '~/.vim/sessions'
-let g:startify_lists = [
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'files',     'header': ['   MRU']            },
-      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
-      \ ]
-
-let g:python_highlight_all=1
+" Make a github link and put it in the clipboard
+let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
 
 let g:markdown_fenced_languages = ['ruby']
 
@@ -197,15 +236,9 @@ let g:fzf_files_options='--preview-window right:50% --preview-window down:wrap -
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 let g:fzf_preview_window = 'right:50%'
 
-let g:NERDTreeStatusline='%#NonText#'
-
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
 let g:vista_fzf_preview = ['right:50%']
-
-let g:webdevicons_conceal_nerdtree_brackets = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 1
 
 " let g:gutentags_trace=1
 let g:gutentags_generate_on_new = 1
@@ -227,8 +260,6 @@ let g:gutentags_project_root = ['package.json', '.git']
 " S/signature Signature of routine (e.g. prototype or parameter list)
 let g:gutentags_ctags_extra_args = ['--fields=+ailmnS']
 let g:gutentags_plus_nomap = 1
-
-
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -256,23 +287,6 @@ function! Preview()
   call system(cmd)
 endfunction
 
-nmap <C-n> :call ToggleNerdTree()<CR>
-function! ToggleNerdTree()
-  set eventignore=BufEnter
-  NERDTreeToggle
-  set eventignore=
-endfunction
-
-
-
-augroup auto_colorize
-  autocmd!
-  autocmd
-        \ BufNewFile,BufRead,BufEnter,BufLeave,WinEnter,WinLeave,WinNew
-        \ *.js,*.css,*.scss,*.sass
-        \ ColorHighlight
-augroup END
-
 
 " TODO Optionally include this as a debug setting in enlighten
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -293,59 +307,6 @@ command! -bang -nargs=* PRg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
 
 
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-" Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-
-
-" TODO Make this a plugin
-"function SimpleTabline()
-"  let s = ''
-"  for i in range(tabpagenr('$'))
-"    " select the highlighting
-"    if i + 1 == tabpagenr()
-"      let s .= '%#TabLineSel#'
-"    else
-"      let s .= '%#TabLine#'
-"    endif
-
-"    " set the tab page number (for mouse clicks)
-"    let s .= '%' . (i + 1) . 'T'
-
-"    " the label is made by TabTitle()
-"    let s .= ' %{TabTitle(' . (i + 1) . ')} '
-"  endfor
-
-"  " after the last tab fill with TabLineFill and reset tab page nr
-"  let s .= '%#TabLineFill#%T'
-
-"  " right-align the label to close the current tab page
-"  if tabpagenr('$') > 1
-"    let s .= '%=%#TabLine#%999Xclose'
-"  endif
-
-"  return s
-"endfunction
-
-"function TabTitle(n)
-"  let buflist = tabpagebuflist(a:n)
-"  let winnr = tabpagewinnr(a:n)
-"  "return bufname(buflist[winnr - 1])
-"  return fnamemodify(bufname(buflist[winnr - 1]), ':t')
-"endfunction
-
 function! s:list_buffers()
   redir => list
   silent ls
@@ -362,4 +323,3 @@ command! BD call fzf#run(fzf#wrap({
   \ 'sink*': { lines -> s:delete_buffers(lines) },
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
 \ }))
-
