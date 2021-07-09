@@ -25,6 +25,9 @@ export LSCOLORS=exfxcxdxbxhghdabagacad # BSD LSCOLORS
 export LS_COLORS="di=0;36:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=0;32:*.rpm=0:*.tar=0;31"
 export IGNOREEOF=42 # ignore <C-D> 42 times before issuing a logout to the shell (prevents accidental logout)
 export FZF_DEFAULT_OPTS=--reverse
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    --color=fg:-1,bg:-1,fg+:-1,bg+:-1,hl+:4,hl:4
+    --color=spinner:-1,info:-1,prompt:-1,pointer:1'
 
 # Alias
 alias ls="ls -G"
