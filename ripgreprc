@@ -1,0 +1,3 @@
+--colors=path:fg:4
+--colors=match:fg:1
+--colors=line:none

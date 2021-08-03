@@ -32,6 +32,7 @@ export FZF_DEFAULT_OPTS=--reverse
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     --color=fg:-1,bg:-1,fg+:-1,bg+:-1,hl+:4,hl:4
     --color=spinner:-1,info:-1,prompt:-1,pointer:1'
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # Alias
 alias ls="ls -G"
