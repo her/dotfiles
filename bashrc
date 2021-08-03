@@ -1,3 +1,7 @@
+# Note % is U+202F or 'Narrow no-break space'
+# from vim in normal mode, cursor over this char
+# type 'ga' to see more information on it!
+#export PS1="\w $ "
 export PS1="\w $ "
 
 # Apple /usr/libexec/path_helper | man path_helper
@@ -71,6 +75,12 @@ is_in_git_repo() { git rev-parse HEAD > /dev/null 2>&1; } # Will return non-zero
 
 # Function exports
 export -f preview
+
+# Match dotfiles with wildcard
+shopt -s dotglob
+# Easily cd into dirs from a var
+shopt -s cdable_vars
+export work=$HOME/work
 
 # LANG
 eval "$(rbenv init -)"
