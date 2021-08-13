@@ -1,10 +1,3 @@
-" nvim 0.5 nightly
-" brew uninstal nvim
-" brew install --HEAD nvim
-" ## Fresh install
-" brew install --HEAD neovim # Nightly version
-"## Upgrade
-" brew upgrade neovim --fetch-HEAD # Sometimes you need to update
 let g:python3_host_prog = expand("$HOME/.pyenv/versions/3.9.1/bin/python3.9")
 let g:ruby_host_prog = expand("$HOME/.rbenv/versions/3.0.0/bin/neovim-ruby-host")
 let g:node_host_prog = expand("$HOME/.nodenv/versions/15.6.0/bin/neovim-node-host")
@@ -12,20 +5,25 @@ let g:node_host_prog = expand("$HOME/.nodenv/versions/15.6.0/bin/neovim-node-hos
 call plug#begin()
 Plug 'psliwka/vim-smoothie'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
 Plug 'her/enlighten'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'antoinemadec/coc-fzf'
+
+Plug 'folke/trouble.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'onsails/lspkind-nvim'
+Plug 'kyazdani42/nvim-tree.lua' " You can toggle the help UI by pressing g?
+"Plug 'glepnir/lspsaga.nvim'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'antoinemadec/coc-fzf'
 
 Plug 'rhysd/git-messenger.vim'
 
-"Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-"Plug 'nvim-telescope/telescope.nvim'
-"Plug 'camspiers/snap'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -36,40 +34,10 @@ Plug 'romgrk/barbar.nvim'
 
 call plug#end()
 
-" lua <<EOF
-"   local snap = require'snap'
-"   local file = config.file:with {reverse = true, suffix = "»"}
-"   local vimgrep = config.vimgrep:with {limit = 50000}
-"   local args = {"--hidden", "--iglob", "!.git/*"}
-
-"   snap.maps {
-"     {"<Leader><Leader>", file {producer = "ripgrep.file", args = args}, "files"},
-"     {"<Leader>sssss", file {producer = "ripgrep.file", prompt = "CustomPrompt"}},
-"     {"<Leader>fg", file {producer = "git.file"}, "git.files"},
-"     {"<Leader>fb", file {producer = "vim.buffer"}, "buffers"},
-"     {"<Leader>ff", vimgrep {}, "grep"},
-"     {"<Leader>fo", file {producer = "vim.oldfile"}, "oldfiles"},
-"     {"<Leader>fs", file {args = args, try = {"git.file", "ripgrep.file"}}, "git-with-fallback"},
-"     {"<Leader>aaaa", file {combine = {"vim.buffer", "vim.oldfiles"}}}
-"   }
-" EOF
-
-" lua <<EOF
-" local snap = require'snap'
-" snap.maps {
-"   {"<Leader>f", snap.config.file {producer = "ripgrep.file"}},
-"   {"<Leader>fb", snap.config.file {producer = "vim.buffer"}},
-"   {"<Leader>fo", snap.config.file {producer = "vim.oldfile"}},
-"   {"<Leader>ff", snap.config.vimgrep {}},
-" }
-" EOF
-
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
-" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-" nnoremap <leader>fu <cmd>Telescope grep_string<cr>
-" nnoremap <leader>fb <cmd>Telescope buffers<cr>
-
-
+luafile ~/.config/nvim/compe-config.lua
+luafile ~/.config/nvim/python-ls.lua
+luafile $HOME/.config/nvim/ruby-ls.lua
+luafile $HOME/.config/nvim/tss-ls.lua
 
 colorscheme enlighten
 
@@ -112,6 +80,65 @@ set incsearch
 set smartcase
 set ignorecase
 
+nmap <silent> <CR> :nohlsearch<CR>
+nmap <Space> <Leader>
+
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.icon_custom_colors = v:true
+nnoremap <silent>    <A-,> :BufferPrevious<CR>
+nnoremap <silent>    <A-.> :BufferNext<CR>
+nnoremap <silent> <C-s>    :BufferPick<CR>
+
+nmap <Leader>f :GFiles<CR>
+nmap <leader>/ :BLines<CR>
+nmap <Leader>\ :Lines<CR>
+nmap <leader>b :Buffers<CR>
+nmap <leader>r :Rg |
+nmap <leader>c :Commands<CR>
+
+command! CopyBufferDir let  @+ = expand('%:p:h')
+command! CopyBufferPath let @+ = expand('%:p')
+command! CopyBufferFilename let @+ = expand('%:p:t')
+
+augroup Ruby
+  autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
+  autocmd BufNewFile,BufRead *.json.jbuilder set ft=ruby
+augroup END
+
+
+" Toggle Tabline
+"nnoremap <silent> <C-F2> :execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>
+"
+"
+" floating tooltip that lists diagnostics
+"lua vim.lsp.diagnostic.show_line_diagnostics()
+"
+
+
+" LSP Things
+
+" LSP config (the mappings used in the default file don't quite work right)
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+
+lua << EOF
+  require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+    use_lsp_diagnostic_signs = true
+  }
+EOF
+
+let g:indent_blankline_char = "│"
+
+
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   -- manually install with :TSInstall maintained
@@ -126,43 +153,75 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-nmap <silent> <CR> :nohlsearch<CR>
-nmap <Space> <Leader>
+lua <<EOF
+require('lspkind').init({
+    -- enables text annotations
+    --
+    -- default: true
+    with_text = true,
 
-let bufferline = get(g:, 'bufferline', {})
-let bufferline.icon_custom_colors = v:true
-nnoremap <silent>    <A-,> :BufferPrevious<CR>
-nnoremap <silent>    <A-.> :BufferNext<CR>
-nnoremap <silent> <C-s>    :BufferPick<CR>
+    -- default symbol map
+    -- can be either 'default' or
+    -- 'codicons' for codicon preset (requires vscode-codicons font installed)
+    --
+    -- default: 'default'
+    preset = 'codicons',
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
+    -- override preset symbols
+    --
+    -- default: {}
+    symbol_map = {
+      Text = '',
+      Method = 'ƒ',
+      Function = '',
+      Constructor = '',
+      Variable = '',
+      Class = '',
+      Interface = 'ﰮ',
+      Module = '',
+      Property = '',
+      Unit = '',
+      Value = '',
+      Enum = '了',
+      Keyword = '',
+      Snippet = '﬌',
+      Color = '',
+      File = '',
+      Folder = '',
+      EnumMember = '',
+      Constant = '',
+      Struct = ''
+    },
+})
+EOF
+
+let g:nvim_tree_follow = 1
+let g:nvim_tree_indent_markers = 1
+let g:nvim_tree_highlight_opened_files = 1
+nnoremap <C-n> :NvimTreeToggle<CR>
 
 
-nmap <Leader>f :GFiles<CR>
-nmap <leader>/ :BLines<CR>
-nmap <Leader>\ :Lines<CR>
-nmap <leader>b :Buffers<CR>
-nmap <leader>r :Rg |
-nmap <leader>c :Commands<CR>
-let coc_fzf_preview='right:50%'
 
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" LSP things for style
+lua <<EOF
+vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
+vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsDefaultWarning"})
+vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", numhl = "LspDiagnosticsDefaultInformation"})
+vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", numhl = "LspDiagnosticsDefaultHint"})
+EOF
 
-command! CopyBufferDir let  @+ = expand('%:p:h')
-command! CopyBufferPath let @+ = expand('%:p')
-command! CopyBufferFilename let @+ = expand('%:p:t')
+" -- LspDiagnostics ---
 
-augroup Ruby
-  autocmd FileType ruby abbreviate <buffer> pry require 'pry'; binding.pry
-  autocmd BufNewFile,BufRead *.json.jbuilder set ft=ruby
-augroup END
+" -- error / warnings
+" fg("LspDiagnosticsSignError", red)
+" fg("LspDiagnosticsVirtualTextError", red)
+" fg("LspDiagnosticsSignWarning", yellow)
+" fg("LspDiagnosticsVirtualTextWarning", yellow)
 
+" -- info
+" fg("LspDiagnosticsSignInformation", green)
+" fg("LspDiagnosticsVirtualTextInformation", green)
+
+" -- hint
+" fg("LspDiagnosticsSignHint", purple)
+" fg("LspDiagnosticsVirtualTextHint", purple)
