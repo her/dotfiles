@@ -41,6 +41,19 @@ luafile $HOME/.config/nvim/tss-ls.lua
 
 colorscheme enlighten
 
+set statusline=\ \
+set statusline=\ %#Separator#%#Contents#%t%#Separator#
+set statusline+=\ %#Separator#
+set statusline+=%#Modified#%{&modified?'●':''}
+set statusline+=%#NotModified#%{&modified?'':'●'}
+set statusline+=%#Separator#
+
+set statusline+=\ %=
+set statusline+=\ %#Separator#%#Contents#%l,%c%#Separator#
+set statusline+=\ %#Separator#%#Contents#%p%%%#Separator#
+set statusline+=\ %#Separator#%#Contents#%Y%#Separator#
+set statusline+=\ 
+
 " make-strings-like-this text objects.
 set iskeyword+=\-
 set shell=bash
