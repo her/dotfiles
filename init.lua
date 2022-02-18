@@ -346,3 +346,7 @@ vim.api.nvim_command([[
     autocmd BufNewFile,BufRead *.json.jbuilder set ft=ruby    
   augroup END
 ]])
+
+
+vim.o.statusline = "%#Separator#%#Contents#%t%#Separator# %#Separator#%#Modified#%{&modified?'●':''}%#NotModified#%{&modified?'':'●'}%#Separator#%= %#Separator#%#Contents#%l,%c%#Separator# %#Separator#%#Contents#%p%%%#Separator# %#Separator#%#Contents#%Y%#Separator#"
+
