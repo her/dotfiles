@@ -42,6 +42,8 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+
+  use { 'numirias/semshi', run = 'UpdateRemotePlugins' }
 end)
 
    
@@ -350,3 +352,21 @@ vim.api.nvim_command([[
 
 vim.o.statusline = "%#Separator#%#Contents#%t%#Separator# %#Separator#%#Modified#%{&modified?'●':''}%#NotModified#%{&modified?'':'●'}%#Separator#%= %#Separator#%#Contents#%l,%c%#Separator# %#Separator#%#Contents#%p%%%#Separator# %#Separator#%#Contents#%Y%#Separator#"
 
+
+-- function MyCustomHighlights()    
+--   hi semshiLocal            ctermfg=1   guifg=#ff875f    
+--   hi semshiGlobal           ctermfg=3   guifg=#ffaf00    
+--   hi semshiImported         ctermfg=3   guifg=#ffaf00 cterm=bold gui=bold    
+--   hi semshiParameter        ctermfg=4   guifg=#5fafff    
+--   hi semshiParameterUnused  ctermfg=7   guifg=#87d7ff cterm=underline gui=underline    
+--   hi semshiFree             ctermfg=13  guifg=#ffafd7    
+--   hi semshiBuiltin          ctermfg=5   guifg=#ff5fff    
+--   hi semshiAttribute        ctermfg=2   guifg=#00ffaf    
+--   hi semshiSelf             ctermfg=249 guifg=#b2b2b2    
+--   hi semshiUnresolved       ctermfg=8   guifg=#ffff00 cterm=underline gui=underline    
+--   hi semshiSelected         ctermfg=11  guifg=#ffffff ctermbg=161 guibg=#d7005f    
+-- " hi semshiErrorSign        ctermfg=9   guifg=#ffffff guibg=#d70000    
+-- " hi semshiErrorChar        ctermfg=9   guifg=#ffffff guibg=#d70000    
+-- endfunction    
+     
+-- autocmd ColorScheme * call MyCustomHighlights()
