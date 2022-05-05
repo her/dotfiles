@@ -110,15 +110,25 @@ require('gitsigns').setup {
 }
 
 -- Telescope
+local action_layout = require("telescope.actions.layout")
 require('telescope').setup {
   defaults = {
+    layout_strategy = 'vertical',
+    path_display={"smart"},
+    layout_config = {
+      preview_cutoff = 1,
+    },
     mappings = {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
+        ['<C-space>'] = action_layout.toggle_preview,
       },
+      n = {
+        ['<C-space>'] = action_layout.toggle_preview,
+      }
     },
-  }
+  },
 }
 require('telescope').load_extension 'fzf'
 
@@ -223,7 +233,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'gopls' }
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'gopls', 'bashls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
