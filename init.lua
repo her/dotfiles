@@ -10,41 +10,44 @@ vim.api.nvim_create_autocmd('BufWritePost', { command = 'source <afile> | Packer
 
 local use = require('packer').use
 require('packer').startup(function()
-  use 'wbthomason/packer.nvim' -- Package manager
-  use 'tpope/vim-fugitive' -- Git commands in nvim
-  use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
-  use 'tpope/vim-surround'
-  use 'tpope/vim-repeat'
+  use 'wbthomason/packer.nvim'
 
-  use 'numToStr/Comment.nvim'
-
-  use 'ludovicchabant/vim-gutentags' -- Automatic tags management
-  -- UI to select things (files, grep results, open buffers...)
-  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  -- use 'joshdick/onedark.vim' -- Theme inspired by Atom
-  --
-  use 'her/enlighten'
-  use 'rakr/vim-one'
-
-  use 'psliwka/vim-smoothie'
-  -- use 'itchyny/lightline.vim' -- Fancier statusline
-  use 'nvim-lualine/lualine.nvim'
-  -- Add indentation guides even on blank lines
-  use 'lukas-reineke/indent-blankline.nvim'
-  -- Add git related info in the signs columns and popups
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  -- Highlight, edit, and navigate code using a fast incremental parsing library
-  use 'nvim-treesitter/nvim-treesitter'
-  -- Additional textobjects for treesitter
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+  -- LSP / Autocompletion
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'saadparwaiz1/cmp_luasnip'
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use 'L3MON4D3/LuaSnip'
+
+  -- Treesitter
+  use 'nvim-treesitter/nvim-treesitter'
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
+
+  -- UI
+  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use 'nvim-lualine/lualine.nvim'
   use 'kyazdani42/nvim-web-devicons'
+  use 'kyazdani42/nvim-tree.lua'
+  use 'rhysd/git-messenger.vim'
+  use 'psliwka/vim-smoothie'
+  use 'lukas-reineke/indent-blankline.nvim'
+  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+
+  -- Utils
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-surround'
+  use 'tpope/vim-repeat'
+  use 'skywind3000/asyncrun.vim'
+  use 'numToStr/Comment.nvim'
+
+  -- Colorschemes
+  use({ "catppuccin/nvim", as = "catppuccin" })
+
+  -- Languages
+  use 'sebdah/vim-delve'
+  use 'ludovicchabant/vim-gutentags'
 end)
 
 vim.o.expandtab = true
@@ -65,11 +68,13 @@ vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 vim.o.completeopt = 'menuone,noselect'
 
--- vim.o.termguicolors = true
--- vim.g.onedark_terminal_italics = 2
-vim.cmd [[colorscheme one]]
--- vim.cmd [[colorscheme enlighten]]
-vim.o.background = 'light'
+-- vim.o.termguicolors = false
+
+-- latte, frappe, macchiato, mocha
+vim.g.catppuccin_flavour = "mocha" 
+vim.cmd[[colorscheme catppuccin]]
+
+vim.o.splitbelow = true
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = ' '
@@ -80,6 +85,8 @@ vim.keymap.set({'n'},  '<CR>', ':nohlsearch<cr>', {silent = true})
 --Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+vim.keymap.set({'t'}, '<Esc>', "<C-\\><C-n>", { silent = true })
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -132,7 +139,6 @@ require('telescope').setup {
 }
 require('telescope').load_extension 'fzf'
 
---Add leader shortcuts
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
 vim.keymap.set('n', '<leader>sf', function()
   require('telescope.builtin').find_files { previewer = false }
@@ -142,6 +148,7 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags)
 vim.keymap.set('n', '<leader>st', require('telescope.builtin').tags)
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').grep_string)
 vim.keymap.set('n', '<leader>sp', require('telescope.builtin').live_grep)
+vim.keymap.set('n', '<leader>bb', function() require('telescope.builtin').live_grep({grep_open_files=true}) end)
 vim.keymap.set('n', '<leader>so', function()
   require('telescope.builtin').tags { only_current_buffer = true }
 end)
@@ -241,7 +248,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-
 -- luasnip setup
 local luasnip = require 'luasnip'
 
@@ -295,9 +301,13 @@ vim.api.nvim_command([[
 
 --vim.o.statusline = "%#Separator#%#Contents#%t%#Separator# %#Separator#%#Modified#%{&modified?'●':''}%#NotModified#%{&modified?'':'●'}%#Separator#%= %#Separator#%#Contents#%l,%c%#Separator# %#Separator#%#Contents#%p%%%#Separator# %#Separator#%#Contents#%Y%#Separator#"
 
+vim.o.winbar = "%=%m %f"
+vim.o.laststatus = 3
+
 require('lualine').setup {
   options = {
-    theme = bubbles_theme,
+    -- theme = 'auto',
+    theme = 'catppuccin',
     component_separators = '|',
     section_separators = { left = '', right = '' },
   },
@@ -324,3 +334,10 @@ require('lualine').setup {
   tabline = {},
   extensions = {},
 }
+
+require'nvim-tree'.setup {}
+vim.keymap.set("n", "<Leader>bp", ":DlvToggleBreakpoint<CR>")
+vim.keymap.set("n", "<F5>", ":DlvExec ./tilectl . --\\ server<CR>")
+vim.g.delve_new_command = 'new' -- open dlv in a horiztonal split
+vim.api.nvim_create_user_command("GoFmt", "!gofmt -w %", {})
+vim.api.nvim_create_user_command("GoBuild", "AsyncRun -mode=term -pos=bottom -rows=10 go build -gcflags='all=-N -l' ./cmd/tilectl", {})
