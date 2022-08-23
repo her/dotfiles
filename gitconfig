@@ -1,12 +1,10 @@
 [color]
   ui = auto
 [core]
-  editor= vim
 	excludesfile = /Users/melanie/.gitignore_global
 [merge]
   conflictstyle = diff3
-[user]
-  email = hello@berkley.io 
-  name = melanie
 [diff]
 	tool = vimdiff
+[alias]
+  edit = !$EDITOR $(git ls-files -o -m --exclude-standard)
